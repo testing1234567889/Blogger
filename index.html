@@ -211,6 +211,7 @@ button:hover {
 }
 .apk-info svg {
   flex-shrink: 0;
+  fill:#00ffe0;
 }
 
 /* ========== Screenshots ========== */
@@ -296,11 +297,11 @@ button:hover {
     <div class="full"><label for="appDesc">Deskripsi Singkat</label><textarea id="appDesc"></textarea></div>
     <div><label for="appVersion">Versi</label><input id="appVersion"></div>
     <div><label for="appDate">Update</label><input id="appDate"></div>
-    <div><label for="appAndroid">Android Required</label><input id="appAndroid" placeholder="misal: 5.0+"></div>
-    <div><label for="appCategory">Kategori</label><input id="appCategory" placeholder="misal: Tools"></div>
+    <div><label for="appAndroid">Android Required</label><input id="appAndroid"></div>
+    <div><label for="appCategory">Kategori</label><input id="appCategory"></div>
     <div><label for="modFeatures">Fitur MOD (pisahkan dengan koma)</label><input id="modFeatures"></div>
     <div><label for="downloadLink">Link Download</label><input id="downloadLink"></div>
-    <div><label for="apkSize">Ukuran APK (MB)</label><input id="apkSize" placeholder="contoh: 12.08"></div>
+    <div><label for="apkSize">Ukuran APK (MB)</label><input id="apkSize"></div>
     <div class="full"><label for="screenshots">Screenshot URLs (pisahkan dengan koma)</label><textarea id="screenshots"></textarea></div>
     <div class="form-actions">
       <button type="button" class="btn-generate" onclick="generateAPKCard()">🔧 Generate</button>
@@ -357,34 +358,53 @@ function generateAPKCard(){
       <div class="apk-developer"><a href="${devLink}" target="_blank" rel="noopener noreferrer">${appDev}</a></div>
     </div>
   </div>
+
   <div class="stat-box">
     <div class="stat-item"><div class="stat-value">${appRating}</div><div class="stat-label">Rating</div></div>
     <div class="stat-item"><div class="stat-value">${appReviews}</div><div class="stat-label">Ulasan</div></div>
     <div class="stat-item"><div class="stat-value">${appDownloads}</div><div class="stat-label">Unduhan</div></div>
   </div>
-  <marquee scrollamount="6" style="background:#212121;color:#ffeb3b;padding:10px;font-size:15px;margin:20px 0;">
-    📢 PERHATIAN! Jangan langsung klik download! Baca info MOD & panduan instalasi untuk menghindari masalah!
-  </marquee>
-  <div class="apk-section-title">Deskripsi</div>
+
+  <div class="apk-section-title"><b>Deskripsi</b></div>
   <div class="apk-description">${appDesc}</div>
-  <div class="apk-section-title">Screenshot</div>
+
+  <div class="apk-section-title"><b>Screenshot</b></div>
   <div class="apk-screenshots">${screenshotHTML}</div>
+
   <div class="apk-section-title"><b>Info APK</b></div>
   <table class="apk-info">
-    <tr><th>Versi</th><td>${appVersion}</td></tr>
-    <tr><th>Minimal Android</th><td>${appAndroid}</td></tr>
-    <tr><th>Developer</th><td><a href="${devLink}" target="_blank" rel="noopener">${appDev}</a></td></tr>
-    <tr><th>Kategori</th><td>${appCategory}</td></tr>
+    <tr>
+      <th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M3 12h18M12 3v18"/></svg>Versi</div></th>
+      <td>${appVersion}</td>
+    </tr>
+    <tr>
+      <th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2l9 21H3z"/></svg>Update</div></th>
+      <td>${appDate}</td>
+    </tr>
+    <tr>
+      <th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 2l9 21H3z"/></svg>Minimal Android</div></th>
+      <td>${appAndroid}</td>
+    </tr>
+    <tr>
+      <th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 22a7.5 7.5 0 0 1 13 0"/></svg>Developer</div></th>
+      <td><a href="${devLink}" target="_blank" rel="noopener">${appDev}</a></td>
+    </tr>
+    <tr>
+      <th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/></svg>Kategori</div></th>
+      <td>${appCategory}</td>
+    </tr>
   </table>
+
   <div class="apk-section-title"><b>Fitur MOD</b></div>
   <div class="apk-tags">${modHTML}</div>
+
   <div class="apk-buttons">
     <a class="download-button" href="#" onclick="startDownload(event,'${downloadLink}')">⬇ Download${apkSize ? ` (${apkSize}MB)` : ""}</a>
     <div class="spinner-area"><div class="spinner"></div><div class="downloading-text">Mengunduh file…</div></div>
-<p style="margin-top:12px;font-size:0.7rem;color:rgba(255,255,255,0.7);font-weight:500;animation:smoothBlink 3s ease-in-out infinite;">
-  🚨 Link rusak? 
-  <a href="https://t.me/key_generatebot" target="_blank" style="color:dodgerblue;font-weight:500;">Hubungi saya di Telegram</a>.
-</p>
+    <p style="margin-top:12px;font-size:0.7rem;color:rgba(255,255,255,0.7);font-weight:500;animation:smoothBlink 3s ease-in-out infinite;">
+      🚨 Link rusak? 
+      <a href="https://t.me/key_generatebot" target="_blank" style="color:dodgerblue;font-weight:500;">Hubungi saya di Telegram</a>.
+    </p>
   </div>
 </div>
 <!-- END APK CARD -->`;
