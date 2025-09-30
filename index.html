@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>APK Card Generator - GxMods</title>
+<title>APK Card Generator - GxMods Next Level</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Generator HTML card APK MOD by GxMods dengan UI Futuristik Next Level">
 <style>
@@ -300,9 +300,10 @@ button:hover {
     <div><label for="appDate">Update</label><input id="appDate"></div>
     <div><label for="appAndroid">Android Required</label><input id="appAndroid" placeholder="misal: 5.0+"></div>
     <div><label for="appCategory">Kategori</label><input id="appCategory" placeholder="misal: Tools"></div>
-    <div><label for="modFeatures">Fitur MOD</label><input id="modFeatures"></div>
+    <div><label for="modFeatures">Fitur MOD (pisahkan dengan koma)</label><input id="modFeatures"></div>
     <div><label for="downloadLink">Link Download</label><input id="downloadLink"></div>
-    <div class="full"><label for="screenshots">Screenshot URLs</label><textarea id="screenshots"></textarea></div>
+    <div><label for="apkSize">Ukuran APK (MB)</label><input id="apkSize" placeholder="contoh: 12.08"></div>
+    <div class="full"><label for="screenshots">Screenshot URLs (pisahkan dengan koma)</label><textarea id="screenshots"></textarea></div>
     <div class="form-actions">
       <button type="button" class="btn-generate" onclick="generateAPKCard()">🔧 Generate</button>
       <button type="button" class="btn-copy" onclick="copyToClipboard()">📋 Salin</button>
@@ -332,6 +333,7 @@ function generateAPKCard(){
   const modFeatures=document.getElementById("modFeatures").value.split(',').map(f=>f.trim()).filter(f=>f);
   const screenshots=document.getElementById("screenshots").value.split(',').map(f=>f.trim()).filter(f=>f);
   const downloadLink=document.getElementById("downloadLink").value;
+  const apkSize=document.getElementById("apkSize").value;
 
   let screenshotHTML=screenshots.map((src,i)=>`<img src="${src}" alt="Screenshot ${i+1}" onclick="openLightbox(${i})">`).join('');
   let modHTML = `<ul style="list-style:none;padding:0;margin:1em 0;">` +
@@ -371,27 +373,15 @@ function generateAPKCard(){
   <div class="apk-screenshots">${screenshotHTML}</div>
   <div class="apk-section-title"><b>Info APK</b></div>
   <table class="apk-info">
-    <tr>
-      <th><div class="icon-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><path d="M3 7V3h4l14 14-4 4L3 7z"/><circle cx="7" cy="7" r="1.5"/></svg>Versi</div></th>
-      <td>${appVersion}</td>
-    </tr>
-    <tr>
-      <th><div class="icon-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><rect x="7" y="9" width="10" height="8" rx="2"/><line x1="9" y1="7" x2="7" y2="9"/><line x1="15" y1="7" x2="17" y2="9"/><line x1="9" y1="17" x2="9" y2="21"/><line x1="15" y1="17" x2="15" y2="21"/><circle cx="10" cy="13" r="0.8"/><circle cx="14" cy="13" r="0.8"/></svg>Minimal Android</div></th>
-      <td>${appAndroid}</td>
-    </tr>
-    <tr>
-      <th><div class="icon-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><rect x="9" y="8" width="6" height="6" rx="1"/><line x1="10" y1="6" x2="9" y2="8"/><line x1="14" y1="6" x2="15" y2="8"/><circle cx="11" cy="11" r="0.5"/><circle cx="13" cy="11" r="0.5"/><path d="M4 8l-2 4 2 4"/><path d="M20 8l2 4-2 4"/></svg>Developer</div></th>
-      <td><a href="${devLink}" target="_blank" rel="noopener">${appDev}</a></td>
-    </tr>
-    <tr>
-      <th><div class="icon-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>Kategori</div></th>
-      <td>${appCategory}</td>
-    </tr>
+    <tr><th>Versi</th><td>${appVersion}</td></tr>
+    <tr><th>Minimal Android</th><td>${appAndroid}</td></tr>
+    <tr><th>Developer</th><td><a href="${devLink}" target="_blank" rel="noopener">${appDev}</a></td></tr>
+    <tr><th>Kategori</th><td>${appCategory}</td></tr>
   </table>
   <div class="apk-section-title"><b>Fitur MOD</b></div>
   <div class="apk-tags">${modHTML}</div>
   <div class="apk-buttons">
-    <a class="download-button" href="#" onclick="startDownload(event,'${downloadLink}')">⬇ Download</a>
+    <a class="download-button" href="#" onclick="startDownload(event,'${downloadLink}')">⬇ Download${apkSize ? ` (${apkSize}MB)` : ""}</a>
     <div class="spinner-area"><div class="spinner"></div><div class="downloading-text">Mengunduh file…</div></div>
 <p style="margin-top:12px;font-size:0.7rem;color:rgba(255,255,255,0.7);font-weight:500;animation:smoothBlink 3s ease-in-out infinite;">
   🚨 Link rusak? 
