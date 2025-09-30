@@ -8,8 +8,7 @@
 <style>
 /* ========== Animated Aurora Background ========== */
 body {
-  margin: 0;
-  padding: 20px;
+  margin: 0; padding: 20px;
   font-family: 'Inter', 'Segoe UI', sans-serif;
   background: linear-gradient(270deg, #0f0c29, #302b63, #24243e);
   background-size: 600% 600%;
@@ -24,24 +23,18 @@ body {
 
 /* ========== Form Container ========== */
 .form-container {
-  max-width: 960px;
-  margin: 20px auto;
-  padding: 32px;
-  border-radius: 24px;
-  background: rgba(20, 20, 30, 0.75);
+  max-width: 960px; margin: 20px auto; padding: 32px;
+  border-radius: 24px; background: rgba(20, 20, 30, 0.75);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(0, 255, 224, 0.15);
   box-shadow: 0 8px 30px rgba(0, 255, 224, 0.15);
   animation: fadeIn 0.6s ease;
 }
 h2 {
-  text-align: center;
-  margin-bottom: 28px;
-  font-size: 1.8rem;
-  font-weight: 700;
+  text-align: center; margin-bottom: 28px;
+  font-size: 1.8rem; font-weight: 700;
   background: linear-gradient(90deg, #00ffe0, #4fc3f7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 
 /* ========== Form Layout ========== */
@@ -104,12 +97,19 @@ button:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 18px r
 .apk-info th { color: #ccc; font-weight: 700; font-size: 0.9rem; }
 .apk-info td { color: #f5f5f5; font-weight: 600; font-size: 0.95rem; }
 .apk-info th .icon-text { display: flex; align-items: center; gap: 6px; }
-.apk-info svg { flex-shrink: 0; fill:#00ffe0; }
+.apk-info svg { flex-shrink: 0; fill: currentColor; }
 
-/* ========== Screenshots ========== */
+/* ========== Screenshots (8K look) ========== */
 .apk-screenshots { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; }
-.apk-screenshots img { width: 150px; border-radius: 14px; cursor: pointer; transition: transform .4s ease, filter .4s ease; filter: brightness(0.9) contrast(1.1) saturate(1.2); }
-.apk-screenshots img:hover { transform: scale(1.05); }
+.apk-screenshots img {
+  width: 150px; border-radius: 14px; cursor: pointer;
+  transition: transform .4s ease, filter .4s ease;
+  filter: brightness(0.95) contrast(1.2) saturate(1.15);
+}
+.apk-screenshots img:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1) contrast(1.35) saturate(1.25) drop-shadow(0 0 6px rgba(0,0,0,0.6));
+}
 
 /* ========== Spinner & Lightbox ========== */
 .spinner-area { display: none; align-items: center; gap: 10px; margin-top: 12px; }
@@ -179,7 +179,7 @@ function generateAPKCard(){
   let modHTML = `<ul style="list-style:none;padding:0;margin:1em 0;">` +
     modFeatures.map(f => `
       <li style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:600;color:#f5f5f5;">
-        <svg width="16" height="16" fill="#00ff88" viewBox="0 0 24 24"><path d="M20.285 6.709l-11.285 11.292-5.285-5.292 1.414-1.414 3.871 3.878 9.871-9.878z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M20.285 6.709l-11.285 11.292-5.285-5.292 1.414-1.414 3.871 3.878 9.871-9.878z"/></svg>
         ${f}
       </li>
     `).join('') + `</ul>`;
@@ -213,6 +213,7 @@ function generateAPKCard(){
     <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M17.6 9.48l1.43-2.49a.5.5 0 0 0-.86-.5l-1.45 2.52A8.14 8.14 0 0 0 12 8c-1.7 0-3.28.53-4.72 1.5L5.83 6.49a.5.5 0 0 0-.86.5l1.42 2.49A7.94 7.94 0 0 0 4 15v5a1 1 0 0 0 1 1h2v-6h2v6h6v-6h2v6h2a1 1 0 0 0 1-1v-5c0-2.23-.91-4.24-2.4-5.52z"/></svg>Minimal Android</div></th><td>${appAndroid}</td></tr>
     <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 22a7.5 7.5 0 0 1 13 0"/></svg>Developer</div></th><td><a href="${devLink}" target="_blank" rel="noopener">${appDev}</a></td></tr>
     <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>Kategori</div></th><td>${appCategory}</td></tr>
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/></svg>Ukuran</div></th><td>${apkSize} MB</td></tr>
   </table>
 
   <div class="apk-section-title"><b>Fitur MOD</b></div>
