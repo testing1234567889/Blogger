@@ -99,7 +99,7 @@ button:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 18px r
 .apk-info th .icon-text { display: flex; align-items: center; gap: 6px; }
 .apk-info svg { flex-shrink: 0; fill: currentColor; }
 
-/* ========== Screenshots (8K look) ========== */
+/* ========== Screenshots ========== */
 .apk-screenshots { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; }
 .apk-screenshots img {
   width: 150px; border-radius: 14px; cursor: pointer;
@@ -140,6 +140,7 @@ button:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 18px r
     <div><label for="appDate">Update</label><input id="appDate"></div>
     <div><label for="appAndroid">Android Required</label><input id="appAndroid"></div>
     <div><label for="appCategory">Kategori</label><input id="appCategory"></div>
+    <div><label for="cpuArch">CPU Architecture</label><input id="cpuArch"></div>
     <div><label for="modFeatures">Fitur MOD (pisahkan dengan koma)</label><input id="modFeatures"></div>
     <div><label for="downloadLink">Link Download</label><input id="downloadLink"></div>
     <div><label for="apkSize">Ukuran APK (MB)</label><input id="apkSize"></div>
@@ -170,6 +171,7 @@ function generateAPKCard(){
   const appDate=document.getElementById("appDate").value;
   const appAndroid=document.getElementById("appAndroid").value;
   const appCategory=document.getElementById("appCategory").value;
+  const cpuArch=document.getElementById("cpuArch").value;
   const modFeatures=document.getElementById("modFeatures").value.split(',').map(f=>f.trim()).filter(f=>f);
   const screenshots=document.getElementById("screenshots").value.split(',').map(f=>f.trim()).filter(f=>f);
   const downloadLink=document.getElementById("downloadLink").value;
@@ -213,6 +215,7 @@ function generateAPKCard(){
     <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M17.6 9.48l1.43-2.49a.5.5 0 0 0-.86-.5l-1.45 2.52A8.14 8.14 0 0 0 12 8c-1.7 0-3.28.53-4.72 1.5L5.83 6.49a.5.5 0 0 0-.86.5l1.42 2.49A7.94 7.94 0 0 0 4 15v5a1 1 0 0 0 1 1h2v-6h2v6h6v-6h2v6h2a1 1 0 0 0 1-1v-5c0-2.23-.91-4.24-2.4-5.52z"/></svg>Minimal Android</div></th><td>${appAndroid}</td></tr>
     <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 22a7.5 7.5 0 0 1 13 0"/></svg>Developer</div></th><td><a href="${devLink}" target="_blank" rel="noopener">${appDev}</a></td></tr>
     <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>Kategori</div></th><td>${appCategory}</td></tr>
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M9 3h6v2h2v2h2v6h-2v2h-2v2H9v-2H7v-2H5V7h2V5h2V3zM7 9v6h10V9H7z"/></svg>CPU Architecture</div></th><td>${cpuArch}</td></tr>
   </table>
 
   <div class="apk-section-title"><b>Fitur MOD</b></div>
