@@ -3,14 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>APK Card Generator - GxMods</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Generator HTML card APK MOD by GxMods dengan UI Futuristik Next Level">
 <style>
-  /* ========== Base UI ========== */
+/* ========== Animated Aurora Background ========== */
 body {
   margin: 0;
   padding: 20px;
   font-family: 'Inter', 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0d0d0d, #1a1a1f);
+  background: linear-gradient(270deg, #0f0c29, #302b63, #24243e);
+  background-size: 600% 600%;
+  animation: bgShift 20s ease infinite;
   color: #e5e5e5;
+}
+@keyframes bgShift {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 /* ========== Form Container ========== */
@@ -130,11 +139,11 @@ button:hover {
   backdrop-filter: blur(20px);
   border: 1px solid rgba(0,255,224,0.25);
   box-shadow: 0 12px 30px rgba(0,255,224,0.2);
-  transition: transform .25s ease, box-shadow .25s ease;
+  transition: transform .4s ease, box-shadow .4s ease;
 }
 .apk-post-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 40px rgba(0,255,224,0.35);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,255,224,0.5);
 }
 .apk-title {
   font-size: 1.5rem;
@@ -174,23 +183,34 @@ button:hover {
   color: #aaa;
 }
 
-/* ========== Buttons (Card) ========== */
-.apk-buttons a.download-button {
-  background: linear-gradient(135deg,#00ffe0,#4fc3f7);
-  padding: 14px 28px;
-  border-radius: 14px;
-  font-weight: bold;
-  font-size: 1rem;
-  color: #000;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  transition: all .25s ease;
+/* ========== Info APK Table ========== */
+.apk-info {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
 }
-.apk-buttons a.download-button:hover {
-  transform: scale(1.07) rotate(-1deg);
-  box-shadow: 0 0 24px rgba(0,255,224,0.6);
+.apk-info th,
+.apk-info td {
+  padding: 8px 10px;
+  text-align: left;
+}
+.apk-info th {
+  color: #ccc;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.apk-info td {
+  color: #f5f5f5;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.apk-info th .icon-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.apk-info svg {
+  flex-shrink: 0;
 }
 
 /* ========== Screenshots ========== */
@@ -204,11 +224,13 @@ button:hover {
   width: 150px;
   border-radius: 14px;
   cursor: pointer;
-  transition: transform .3s ease, box-shadow .3s ease;
+  transition: transform .4s ease, filter .4s ease, box-shadow .4s ease;
+  filter: brightness(0.9) contrast(1.1) saturate(1.2);
 }
 .apk-screenshots img:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 18px rgba(0,255,224,0.4);
+  transform: scale(1.15);
+  filter: brightness(1.2) contrast(1.3) saturate(1.4) drop-shadow(0 0 12px rgba(0,255,224,0.6));
+  box-shadow: 0 0 30px rgba(0,255,224,0.5), 0 0 50px rgba(0,255,224,0.3);
 }
 
 /* ========== Spinner ========== */
@@ -252,26 +274,35 @@ button:hover {
   animation: fadeIn .3s ease;
 }
 
+/* ========== Verified Icon Blink ========== */
+.verified-icon {
+  animation: blinkBadge 2s infinite alternate;
+}
+@keyframes blinkBadge {
+  from { filter: drop-shadow(0 0 2px #00ffe0); opacity: 0.6; }
+  to { filter: drop-shadow(0 0 6px #00ffe0); opacity: 1; }
+}
 </style>
 </head>
 <body>
 <div class="form-container">
   <h2>🛠️ APK Card Generator - GxMods</h2>
   <form id="apkCardForm">
-    <div><label>Nama Aplikasi</label><input id="appName"></div>
-    <div><label>Developer</label><input id="appDev"></div>
-    <div><label>Link Developer</label><input id="devLink"></div>
-    <div><label>Icon URL</label><input id="iconUrl"></div>
-    <div><label>Rating</label><input id="appRating"></div>
-    <div><label>Ulasan</label><input id="appReviews"></div>
-    <div><label>Unduhan</label><input id="appDownloads"></div>
-    <div class="full"><label>Deskripsi Singkat</label><textarea id="appDesc"></textarea></div>
-    <div><label>Versi</label><input id="appVersion"></div>
-    <div><label>Ukuran</label><input id="appSize"></div>
-    <div><label>Update</label><input id="appDate"></div>
-    <div><label>Fitur MOD</label><input id="modFeatures"></div>
-    <div><label>Link Download</label><input id="downloadLink"></div>
-    <div class="full"><label>Screenshot URLs</label><textarea id="screenshots"></textarea></div>
+    <div><label for="appName">Nama Aplikasi</label><input id="appName"></div>
+    <div><label for="appDev">Developer</label><input id="appDev"></div>
+    <div><label for="devLink">Link Developer</label><input id="devLink"></div>
+    <div><label for="iconUrl">Icon URL</label><input id="iconUrl"></div>
+    <div><label for="appRating">Rating</label><input id="appRating"></div>
+    <div><label for="appReviews">Ulasan</label><input id="appReviews"></div>
+    <div><label for="appDownloads">Unduhan</label><input id="appDownloads"></div>
+    <div class="full"><label for="appDesc">Deskripsi Singkat</label><textarea id="appDesc"></textarea></div>
+    <div><label for="appVersion">Versi</label><input id="appVersion"></div>
+    <div><label for="appDate">Update</label><input id="appDate"></div>
+    <div><label for="appAndroid">Android Required</label><input id="appAndroid" placeholder="misal: 5.0+"></div>
+    <div><label for="appCategory">Kategori</label><input id="appCategory" placeholder="misal: Tools"></div>
+    <div><label for="modFeatures">Fitur MOD</label><input id="modFeatures"></div>
+    <div><label for="downloadLink">Link Download</label><input id="downloadLink"></div>
+    <div class="full"><label for="screenshots">Screenshot URLs</label><textarea id="screenshots"></textarea></div>
     <div class="form-actions">
       <button type="button" class="btn-generate" onclick="generateAPKCard()">🔧 Generate</button>
       <button type="button" class="btn-copy" onclick="copyToClipboard()">📋 Salin</button>
@@ -295,25 +326,25 @@ function generateAPKCard(){
   const appDownloads=document.getElementById("appDownloads").value;
   const appDesc=document.getElementById("appDesc").value;
   const appVersion=document.getElementById("appVersion").value;
-  const appSize=document.getElementById("appSize").value;
   const appDate=document.getElementById("appDate").value;
+  const appAndroid=document.getElementById("appAndroid").value;
+  const appCategory=document.getElementById("appCategory").value;
   const modFeatures=document.getElementById("modFeatures").value.split(',').map(f=>f.trim()).filter(f=>f);
   const screenshots=document.getElementById("screenshots").value.split(',').map(f=>f.trim()).filter(f=>f);
   const downloadLink=document.getElementById("downloadLink").value;
 
   let screenshotHTML=screenshots.map((src,i)=>`<img src="${src}" alt="Screenshot ${i+1}" onclick="openLightbox(${i})">`).join('');
-let modHTML = `<ul style="list-style:none;padding:0;margin:1em 0;">` +
-  modFeatures.map(f => `
-    <li style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:600;color:#f5f5f5;">
-      <svg width="16" height="16" fill="#00ff88" viewBox="0 0 24 24">
-        <path d="M20.285 6.709l-11.285 11.292-5.285-5.292 
-                 1.414-1.414 3.871 3.878 9.871-9.878z"/>
-      </svg>
-      ${f}
-    </li>
-  `).join('') +
-`</ul>`;
-
+  let modHTML = `<ul style="list-style:none;padding:0;margin:1em 0;">` +
+    modFeatures.map(f => `
+      <li style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:600;color:#f5f5f5;">
+        <svg width="16" height="16" fill="#00ff88" viewBox="0 0 24 24">
+          <path d="M20.285 6.709l-11.285 11.292-5.285-5.292 
+                   1.414-1.414 3.871 3.878 9.871-9.878z"/>
+        </svg>
+        ${f}
+      </li>
+    `).join('') +
+  `</ul>`;
 
   const htmlOutput=`<!-- BEGIN APK CARD GENERATED -->
 <div class="apk-post-card">
@@ -323,7 +354,7 @@ let modHTML = `<ul style="list-style:none;padding:0;margin:1em 0;">` +
       <div class="apk-title">${appName}
         <img alt="Verified" class="verified-icon" src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" style="width:18px;height:18px;"/>
       </div>
-      <div class="apk-developer"><a href="${devLink}" target="_blank">${appDev}</a></div>
+      <div class="apk-developer"><a href="${devLink}" target="_blank" rel="noopener noreferrer">${appDev}</a></div>
     </div>
   </div>
   <div class="stat-box">
@@ -339,21 +370,33 @@ let modHTML = `<ul style="list-style:none;padding:0;margin:1em 0;">` +
   <div class="apk-section-title">Screenshot</div>
   <div class="apk-screenshots">${screenshotHTML}</div>
   <div class="apk-section-title"><b>Info APK</b></div>
-  <div class="apk-info"><span>Versi: ${appVersion}</span> | <span>Update: ${appDate}</span></div>
+  <table class="apk-info">
+    <tr>
+      <th><div class="icon-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><path d="M3 7V3h4l14 14-4 4L3 7z"/><circle cx="7" cy="7" r="1.5"/></svg>Versi</div></th>
+      <td>${appVersion}</td>
+    </tr>
+    <tr>
+      <th><div class="icon-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><rect x="7" y="9" width="10" height="8" rx="2"/><line x1="9" y1="7" x2="7" y2="9"/><line x1="15" y1="7" x2="17" y2="9"/><line x1="9" y1="17" x2="9" y2="21"/><line x1="15" y1="17" x2="15" y2="21"/><circle cx="10" cy="13" r="0.8"/><circle cx="14" cy="13" r="0.8"/></svg>Minimal Android</div></th>
+      <td>${appAndroid}</td>
+    </tr>
+    <tr>
+      <th><div class="icon-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><rect x="9" y="8" width="6" height="6" rx="1"/><line x1="10" y1="6" x2="9" y2="8"/><line x1="14" y1="6" x2="15" y2="8"/><circle cx="11" cy="11" r="0.5"/><circle cx="13" cy="11" r="0.5"/><path d="M4 8l-2 4 2 4"/><path d="M20 8l2 4-2 4"/></svg>Developer</div></th>
+      <td><a href="${devLink}" target="_blank" rel="noopener">${appDev}</a></td>
+    </tr>
+    <tr>
+      <th><div class="icon-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>Kategori</div></th>
+      <td>${appCategory}</td>
+    </tr>
+  </table>
   <div class="apk-section-title"><b>Fitur MOD</b></div>
   <div class="apk-tags">${modHTML}</div>
   <div class="apk-buttons">
-    <a class="download-button" href="#" onclick="startDownload(event,'${downloadLink}')">⬇ Download (${appSize})</a>
+    <a class="download-button" href="#" onclick="startDownload(event,'${downloadLink}')">⬇ Download</a>
     <div class="spinner-area"><div class="spinner"></div><div class="downloading-text">Mengunduh file…</div></div>
-<p style="margin-top:12px;font-size:0.7rem;
-          color:rgba(255,255,255,0.7);
-          font-weight:500;
-          animation:smoothBlink 3s ease-in-out infinite;">
+<p style="margin-top:12px;font-size:0.7rem;color:rgba(255,255,255,0.7);font-weight:500;animation:smoothBlink 3s ease-in-out infinite;">
   🚨 Link rusak? 
-  <a href="https://t.me/key_generatebot" target="_blank" 
-     style="color:dodgerblue;font-weight:500;">Hubungi saya di Telegram</a>.
+  <a href="https://t.me/key_generatebot" target="_blank" style="color:dodgerblue;font-weight:500;">Hubungi saya di Telegram</a>.
 </p>
-
   </div>
 </div>
 <!-- END APK CARD -->`;
@@ -363,8 +406,7 @@ let modHTML = `<ul style="list-style:none;padding:0;margin:1em 0;">` +
 
 function copyToClipboard(){
   const output=document.getElementById("outputHTML");
-  output.select();document.execCommand("copy");
-  alert("Kode HTML telah disalin!");
+  navigator.clipboard.writeText(output.value).then(()=>alert("Kode HTML telah disalin!"));
 }
 
 function startDownload(e,link){
@@ -375,7 +417,7 @@ function startDownload(e,link){
   setTimeout(()=>{
     spinnerArea.style.display="none";
     btn.style.display="inline-flex";
-    window.open(link,"_blank");
+    window.open(link,"_blank","noopener,noreferrer");
   },2000);
 }
 
@@ -386,13 +428,11 @@ function openLightbox(index){
 }
 function closeLightbox(){document.getElementById("lightbox").style.display="none";}
 
-// Auto save ke localStorage
-document.querySelectorAll("#apkCardForm input,#apkCardForm textarea").forEach(input=>{
-  input.addEventListener("input",()=>{localStorage.setItem(input.id,input.value);});
-});
-window.addEventListener("DOMContentLoaded",()=>{
+// Auto restore form
+window.addEventListener("DOMContentLoaded", ()=>{
   document.querySelectorAll("#apkCardForm input,#apkCardForm textarea").forEach(input=>{
     const saved=localStorage.getItem(input.id);if(saved!==null){input.value=saved;}
+    input.addEventListener("input",()=>{localStorage.setItem(input.id,input.value);});
   });
 });
 </script>
