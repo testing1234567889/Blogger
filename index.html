@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Generator HTML card APK MOD by GxMods dengan UI Futuristik Next Level">
 <style>
-/* ========== Animated Aurora Background ========== */
+/* ========== Animated Aurora Background (tetap) ========== */
 body {
   margin: 0; padding: 20px;
   font-family: 'Inter', 'Segoe UI', sans-serif;
@@ -21,7 +21,7 @@ body {
   100%{background-position:0% 50%}
 }
 
-/* ========== Form Container ========== */
+/* ========== Form Container (tetap) ========== */
 .form-container {
   max-width: 960px; margin: 20px auto; padding: 32px;
   border-radius: 24px; background: rgba(20, 20, 30, 0.75);
@@ -37,7 +37,7 @@ h2 {
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 
-/* ========== Form Layout ========== */
+/* ========== Form Layout (tetap) ========== */
 form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
 form > div { display: flex; flex-direction: column; }
 label { margin-bottom: 8px; font-size: 0.9rem; color: #8be9fd; font-weight: 500; }
@@ -56,7 +56,7 @@ textarea { resize: vertical; min-height: 90px; }
 .full { grid-column: 1 / -1; }
 @media(max-width: 720px) { form { grid-template-columns: 1fr; } }
 
-/* ========== Output Area & Buttons ========== */
+/* ========== Output Area & Buttons (tetap) ========== */
 .form-actions { grid-column: 1/-1; display: flex; justify-content: center; gap: 14px; margin-top: 8px; }
 button {
   padding: 12px 26px; border: none; border-radius: 12px;
@@ -73,7 +73,7 @@ button:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 18px r
   color: #00ffe0; font-family: 'Fira Code', monospace; font-size: 0.85rem;
 }
 
-/* ========== APK Card Result ========== */
+/* ========== APK Card Result (tetap) ========== */
 .apk-post-card {
   margin: 28px 0; padding: 28px;
   border-radius: 20px; background: rgba(20, 20, 30, 0.85);
@@ -91,7 +91,7 @@ button:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 18px r
 .stat-value { font-size: 1.2rem; font-weight: 700; color: #fff; }
 .stat-label { font-size: 0.8rem; color: #aaa; }
 
-/* ========== Info APK Table ========== */
+/* ========== Info APK Table (tetap) ========== */
 .apk-info { width: 100%; border-collapse: collapse; margin-top: 16px; }
 .apk-info th, .apk-info td { padding: 8px 10px; text-align: left; }
 .apk-info th { color: #ccc; font-weight: 700; font-size: 0.9rem; }
@@ -99,7 +99,7 @@ button:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 18px r
 .apk-info th .icon-text { display: flex; align-items: center; gap: 6px; }
 .apk-info svg { flex-shrink: 0; fill: currentColor; }
 
-/* ========== Screenshots ========== */
+/* ========== Screenshots (generator default – akan di-override di bawah) ========== */
 .apk-screenshots { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; }
 .apk-screenshots img {
   width: 150px; border-radius: 14px; cursor: pointer;
@@ -111,17 +111,189 @@ button:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 18px r
   filter: brightness(1.1) contrast(1.35) saturate(1.25) drop-shadow(0 0 6px rgba(0,0,0,0.6));
 }
 
-/* ========== Spinner & Lightbox ========== */
+/* ========== Spinner (tetap) ========== */
 .spinner-area { display: none; align-items: center; gap: 10px; margin-top: 12px; }
 .spinner { width: 20px; height: 20px; border: 3px solid rgba(0,255,224,0.3); border-top: 3px solid #00ffe0; border-radius: 50%; animation: spin 1s linear infinite; }
 .downloading-text { font-size: 0.9rem; color: #00ffe0; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
-#lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 9999; }
-#lightbox img { max-width: 92%; max-height: 92%; border-radius: 20px; box-shadow: 0 0 28px rgba(0,255,224,0.7); animation: fadeIn .3s ease; }
 
-/* ========== Verified Icon Blink ========== */
+/* ========== Verified Icon Blink (tetap) ========== */
 .verified-icon { animation: blinkBadge 2s infinite alternate; }
 @keyframes blinkBadge { from { filter: drop-shadow(0 0 2px #00ffe0); opacity: 0.6; } to { filter: drop-shadow(0 0 6px #00ffe0); opacity: 1; } }
+
+/* ========== Tambahan agar animasi 'smoothBlink' di sample tidak error (opsional) ========== */
+@keyframes smoothBlink { 0%{opacity:.75} 50%{opacity:1} 100%{opacity:.75} }
+
+/* ===================================================================== */
+/* =======================  CSS DARI KODE KAMU  ======================== */
+/* ===================================================================== */
+
+/* ===== GLOBAL: anti tap-biru & no overscroll chain ===== */
+:root{ --tap-clear: rgba(0,0,0,0); scrollbar-gutter: stable both-edges; }
+html,body,*,a,button,img,svg{ -webkit-tap-highlight-color: var(--tap-clear); }
+html,body{ overscroll-behavior: none; }
+a,button{ -webkit-appearance:none; appearance:none; }
+button,.download-button,.lightbox-arrow,.lightbox-close{
+  outline:none!important; box-shadow:none!important;
+  touch-action:manipulation; -webkit-user-select:none; user-select:none;
+}
+
+/* ===== UI LAIN (biarin) ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+.apk-post-card{width:95%;max-width:860px;margin:20px auto;background:#1a1a1a;color:#fff;border-radius:16px;padding:20px;box-shadow:0 6px 20px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.05);transition:transform .2s,box-shadow .2s}
+.apk-post-card:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.4)}
+.apk-header{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.apk-icon{width:80px;height:80px;border-radius:16px;object-fit:cover}
+.apk-title{font-size:1.5rem;font-weight:600;display:flex;align-items:center;gap:6px}
+.verified-icon{width:18px;height:18px}
+.apk-developer{font-size:.9rem;color:#aaa}
+.stat-box{display:flex;justify-content:space-between;background:#1f1f1f;border-radius:12px;padding:15px;margin:20px 0;text-align:center}
+.stat-item{flex:1;border-right:1px solid #333;padding:0 10px}
+.stat-item:last-child{border-right:none}
+.stat-value{font-size:20px;font-weight:700;color:#fff}
+.stat-label{font-size:12px;color:#aaa}
+.apk-section-title{font-size:1.1rem;margin:12px 0 6px;padding-left:10px;border-left:4px solid #00ffe0;color:#eee}
+.apk-info{width:100%;border-collapse:collapse;margin-top:12px;font-size:.8rem;table-layout:fixed}
+.apk-info th,.apk-info td{padding:6px 8px;background:transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.apk-info th{font-weight:600;color:#ccc;text-align:left;width:50%}
+.apk-info td{font-weight:400;color:#f5f5f5;text-align:left;width:72%}
+.apk-info th .icon-text{display:flex;align-items:center;gap:6px}
+.apk-info th svg{flex-shrink:0;width:16px;height:16px;fill:currentColor}
+.apk-info td a{color:#4fc3f7;text-decoration:none;white-space:nowrap}
+.apk-info td a:hover{color:#00b0ff;text-decoration:underline}
+.apk-description{font-family:'Segoe UI',Roboto,sans-serif;font-size:.95rem;line-height:1.6;color:#eaeaea;background:#1e1e1e;padding:12px 16px;border-radius:12px;text-align:justify;word-break:break-word;box-shadow:inset 0 1px 2px rgba(0,0,0,.15)}
+.apk-description a{color:#4fc3f7;text-decoration:underline}
+.apk-description a:hover{color:#00b0ff;text-decoration:none}
+.apk-tags li svg{width:16px;height:16px;fill:#00ff88;flex-shrink:0}
+
+/* ===== SCREENSHOTS (override jadi horizontal scroll + efek loaded) ===== */
+.apk-screenshots img{ -webkit-tap-highlight-color: var(--tap-clear); }
+.apk-screenshots{
+  position:relative;display:flex;gap:10px;padding:8px 24px;
+  overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+  scroll-snap-type:x mandatory; scroll-padding-inline:24px; justify-content:flex-start;
+}
+.apk-screenshots::-webkit-scrollbar{height:8px}
+.apk-screenshots::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
+.apk-screenshots{scrollbar-width:thin;scrollbar-color:#333 transparent}
+.apk-screenshots::before,.apk-screenshots::after{content:"";position:absolute;top:0;bottom:0;width:24px;pointer-events:none}
+.apk-screenshots::before{left:0;background:linear-gradient(90deg,rgba(0,0,0,.35),transparent)}
+.apk-screenshots::after{right:0;background:linear-gradient(-90deg,rgba(0,0,0,.35),transparent)}
+.apk-screenshots img{
+  height:180px;border-radius:10px;flex-shrink:0;scroll-snap-align:start;object-fit:cover;
+  transition:transform .22s,filter .22s,box-shadow .22s,opacity .25s;
+  opacity:0;transform:scale(.97);user-select:none;cursor:pointer
+}
+.apk-screenshots img.loaded{opacity:1;transform:scale(1)}
+.apk-screenshots img:hover{transform:scale(1.06);filter:brightness(1.08) contrast(1.2) saturate(1.15);box-shadow:0 6px 24px rgba(0,0,0,.35)}
+.apk-screenshots img:active{transform:scale(.94)}
+@media (max-width:768px){.apk-screenshots img{height:140px}}
+@media (max-width:480px){.apk-screenshots img{height:120px}}
+
+/* ===== LIGHTBOX ===== */
+#lightboxImage{ display:none !important; }
+.lightbox{
+  position:fixed; inset:0; width:100vw; height:100dvh;
+  background:rgba(0,0,0,.55);
+  backdrop-filter: blur(8px) saturate(110%);
+  display:flex!important; justify-content:center; align-items:center; z-index:9999;
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition: opacity .18s ease, visibility 0s linear .18s;
+  will-change: opacity, backdrop-filter;
+  contain: paint; isolation:isolate;
+  -webkit-backface-visibility:hidden; backface-visibility:hidden;
+  transform: translateZ(0);
+  overscroll-behavior:contain;
+  padding: max(0px, env(safe-area-inset-top))
+           env(safe-area-inset-right)
+           env(safe-area-inset-bottom)
+           env(safe-area-inset-left);
+}
+.lightbox.open{ opacity:1; visibility:visible; pointer-events:auto; transition: opacity .18s ease; }
+
+/* Viewport (di-zoom/pan) */
+.lb-viewport{
+  position:absolute; inset:0; margin:auto;
+  width:calc(100% - 120px); max-width:100%;
+  height:80vh; max-height:80vh;
+  border-radius:12px; overflow:hidden;
+  will-change: transform;
+  touch-action:none;   /* gesture diurus manual */
+  cursor: grab;
+  transform:translateZ(0); contain:layout paint style;
+}
+.lb-viewport:active{ cursor: grabbing; }
+
+/* Dua layer untuk crossfade/slide */
+.lb-layer{
+  position:absolute; inset:0;
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:contain;
+  opacity:0;
+  transition: opacity .22s ease, transform .22s cubic-bezier(.2,.7,.2,1);
+  will-change: opacity, transform;
+}
+.lb-layer.show{ opacity:1; }
+
+/* Panah & Close */
+.lightbox-nav{position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);pointer-events:none}
+.lightbox-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(0,0,0,.45);border:none;color:#fff;
+  width:64px;height:64px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:auto;cursor:pointer;transition:background .15s,transform .15s
+}
+.lightbox-arrow:hover{background:rgba(0,0,0,.65);transform:translateY(-50%) scale(1.08)}
+.lightbox-arrow svg{width:32px;height:32px;stroke-width:2.8}
+.left-arrow{left:10px} .right-arrow{right:10px}
+@media (max-width:768px){.lightbox-arrow{width:52px;height:52px}.lightbox-arrow svg{width:26px;height:26px}}
+@media (max-width:480px){.lightbox-arrow{width:46px;height:46px}.lightbox-arrow svg{width:22px;height:22px}}
+.lightbox-close{
+  position:absolute;top:20px;right:20px;background:rgba(0,0,0,.6);
+  border:none;color:#fff;font-size:28px;border-radius:50%;width:44px;height:44px;cursor:pointer;z-index:10000;
+}
+
+/* Share button + toast */
+.lightbox-share{
+  position:absolute; top:20px; right:72px;
+  background:rgba(0,0,0,.6); border:none; color:#fff;
+  border-radius:50%; width:44px; height:44px;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:10000;
+  transition:background .15s, transform .15s;
+}
+.lightbox-share:hover{ background:rgba(0,0,0,.7); transform:scale(1.06); }
+.lightbox-share:active{ transform:scale(.94); }
+.lightbox-share svg{ width:22px; height:22px; display:block; }
+@media (max-width:480px){ .lightbox-share{ width:40px;height:40px; right:66px; } }
+
+.lb-toast{
+  position:absolute; left:50%; bottom:24px; transform:translateX(-50%);
+  background:rgba(0,0,0,.75); color:#fff; padding:10px 14px; border-radius:10px;
+  font-size:.85rem; z-index:10001; pointer-events:none; opacity:0; 
+  transition:opacity .18s ease;
+}
+.lb-toast.show{ opacity:1; }
+
+/* Hint cursor saat tepi aktif untuk slide (zoom mode) */
+.lb-viewport.can-edge-left,
+.lb-viewport.can-edge-right{ cursor: ew-resize; }
+
+/* Download btn (biarin) */
+.apk-buttons{margin-top:24px;text-align:center}
+.download-button{background:#1e293b;color:#f8fafc;padding:14px 28px;font-size:1rem;font-weight:600;font-family:'Inter','Segoe UI',sans-serif;border-radius:10px;border:1px solid #334155;display:inline-flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer;transition:background-color .2s,box-shadow .2s,transform .2s;box-shadow:0 4px 6px rgba(0,0,0,.1)}
+.download-button:hover{background:#334155;transform:translateY(-2px);box-shadow:0 6px 10px rgba(0,0,0,.15)}
+.spinner-area{display:none;justify-content:center;align-items:center;flex-direction:column}
+.spinner{width:28px;height:28px;border:4px solid #fff;border-top:4px solid transparent;border-radius:50%;animation:spin .7s linear infinite;margin:10px auto}
+.downloading-text{font-size:.9rem;color:#fff;margin-top:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .lightbox,.lb-layer,.lb-viewport{transition:none!important}
+  .apk-screenshots img{ transition:none!important; }
+}
 </style>
 </head>
 <body>
@@ -154,10 +326,35 @@ button:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 18px r
   <textarea id="outputHTML"></textarea>
 </div>
 
-<!-- Lightbox -->
-<div id="lightbox" onclick="closeLightbox()"><img id="lightbox-img" src=""></div>
+<!-- Lightbox (struktur dari kode kamu; HTML tidak diubah) -->
+<div id="lightbox" class="lightbox" style="display:none;">
+  <div class="lightbox-nav">
+    <button class="lightbox-arrow left-arrow">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+        <path d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    <button class="lightbox-arrow right-arrow">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+        <path d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+  <img id="lightboxImage" src="" />
+  <button id="closeBtn" class="lightbox-close">✕</button>
+</div>
 
 <script>
+/* ===== Proteksi ringan ===== */
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  const blocked=['F12','PrintScreen'], ctrl=['c','u','s','a'];
+  if(blocked.includes(e.key) || (e.ctrlKey && ctrl.includes(e.key.toLowerCase()))) e.preventDefault();
+});
+document.addEventListener('selectstart', e => e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
+
+/* ===== Generator (tetap) ===== */
 function generateAPKCard(){
   const appName=document.getElementById("appName").value;
   const appDev=document.getElementById("appDev").value;
@@ -239,22 +436,377 @@ function copyToClipboard(){
   navigator.clipboard.writeText(output.value).then(()=>alert("Kode HTML telah disalin!"));
 }
 
-function startDownload(e,link){
-  e.preventDefault();
-  const btn=e.currentTarget;
-  const spinnerArea=btn.parentElement.querySelector(".spinner-area");
-  btn.style.display="none";spinnerArea.style.display="flex";
-  setTimeout(()=>{ spinnerArea.style.display="none"; btn.style.display="inline-flex"; window.open(link,"_blank","noopener,noreferrer"); },2000);
+/* ===== Download demo (biarin, disamakan dengan kode kamu) ===== */
+function startDownload(event, url){
+  event.preventDefault();
+  const btn = event.currentTarget;
+  const area = btn.closest(".apk-buttons").querySelector(".spinner-area");
+  btn.style.display="none"; area.style.display="flex";
+  setTimeout(()=>{ area.style.display="none"; btn.style.display="inline-flex"; window.location.href=url; },2000);
 }
 
-function openLightbox(index){
-  const screenshots=document.getElementById("screenshots").value.split(',').map(f=>f.trim()).filter(f=>f);
-  document.getElementById("lightbox-img").src=screenshots[index];
-  document.getElementById("lightbox").style.display="flex";
-}
-function closeLightbox(){ document.getElementById("lightbox").style.display="none"; }
+/* ===== Lightbox (viewport + 2 layers background) – dari kode kamu ===== */
+let currentIndex=0, naturalW=1, naturalH=1;
+const lightbox = document.getElementById("lightbox");
+const leftArrow = document.querySelector(".left-arrow");
+const rightArrow = document.querySelector(".right-arrow");
+const closeBtn = document.getElementById("closeBtn");
 
-// Auto restore form
+// Viewport & layers
+const viewport = document.createElement('div');
+viewport.className = 'lb-viewport';
+const layerA = document.createElement('div');
+const layerB = document.createElement('div');
+layerA.className = 'lb-layer';
+layerB.className = 'lb-layer';
+viewport.appendChild(layerA);
+viewport.appendChild(layerB);
+lightbox.insertBefore(viewport, closeBtn);
+
+// Loaded class for thumbs
+document.querySelectorAll(".apk-screenshots img").forEach(img=>{
+  img.setAttribute('loading','lazy');
+  if(img.complete) img.classList.add("loaded");
+  else img.addEventListener("load", ()=> img.classList.add("loaded"));
+});
+
+function updateArrows(screens){
+  leftArrow.style.display = currentIndex===0?'none':'flex';
+  rightArrow.style.display = currentIndex===screens.length-1?'none':'flex';
+}
+
+// Preload
+function preload(src){
+  return new Promise((resolve)=>{
+    const im = new Image();
+    im.decoding='async';
+    im.onload=()=> resolve({w:im.naturalWidth||1, h:im.naturalHeight||1});
+    im.onerror=()=> resolve({w:1,h:1});
+    im.src = src;
+    if(im.decode){ im.decode().then(()=>resolve({w:im.naturalWidth||1,h:im.naturalHeight||1})).catch(()=>resolve({w:im.naturalWidth||1,h:im.naturalHeight||1})); }
+  });
+}
+
+// Scroll lock
+function lockScroll(lock){
+  const html = document.documentElement;
+  if(lock){
+    const sbw = window.innerWidth - html.clientWidth;
+    if(sbw>0) document.body.style.paddingRight = sbw + 'px';
+    html.style.overflow = 'hidden';
+  } else {
+    html.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+}
+
+// ===== Zoom (PINCH only) & Pan =====
+let zoom=1, panX=0, panY=0, isPanning=false, startPX=0, startPY=0;
+let baseW=0, baseH=0;
+
+function computeBaseSize(){
+  const vpW = viewport.clientWidth;
+  const vpH = viewport.clientHeight;
+  const ratio = Math.min(vpW / naturalW, vpH / naturalH, 1);
+  baseW = naturalW * ratio; baseH = naturalH * ratio;
+}
+function clampPan(){
+  const maxX=Math.max(0,(baseW*zoom-baseW)/2);
+  const maxY=Math.max(0,(baseH*zoom-baseH)/2);
+  panX=Math.max(-maxX,Math.min(maxX,panX));
+  panY=Math.max(-maxY,Math.min(maxY,panY));
+}
+function applyTransform(){
+  clampPan();
+  viewport.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
+}
+function resetView(){
+  zoom=1; panX=0; panY=0; isPanning=false;
+  viewport.style.transform = 'translate(0px, 0px) scale(1)';
+}
+
+// NO wheel / NO double-tap: ditiadakan
+
+// Pan saat zoom>1
+viewport.addEventListener('pointerdown', (e)=>{
+  if(zoom===1) return;
+  isPanning=true;
+  startPX=e.clientX-panX; startPY=e.clientY-panY;
+  viewport.setPointerCapture(e.pointerId);
+  viewport.style.cursor="grabbing";
+});
+viewport.addEventListener('pointermove', (e)=>{
+  if(!isPanning) return;
+  panX=e.clientX-startPX; panY=e.clientY-startPY;
+  applyTransform();
+});
+['pointerup','pointercancel','pointerleave'].forEach(ev=>{
+  viewport.addEventListener(ev, (e)=>{
+    if(!isPanning) return;
+    isPanning=false;
+    try{ viewport.releasePointerCapture(e.pointerId); }catch(_){}
+    viewport.style.cursor="grab";
+  });
+});
+
+// Pinch zoom (touch 2 jari)
+const activePtrs=new Map();
+let pinchStartDist=0, pinchStartZoom=1;
+viewport.addEventListener('pointerdown',(e)=>{
+  if(e.pointerType==='touch'){ activePtrs.set(e.pointerId,{x:e.clientX,y:e.clientY}); }
+});
+viewport.addEventListener('pointermove',(e)=>{
+  if(e.pointerType==='touch' && activePtrs.has(e.pointerId)){
+    activePtrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(activePtrs.size===2){
+      const pts=[...activePtrs.values()];
+      const d=Math.hypot(pts[0].x-pts[1].x, pts[0].y-pts[1].y);
+      if(!pinchStartDist){ pinchStartDist=d; pinchStartZoom=zoom; }
+      let nz = Math.min(3, Math.max(1, pinchStartZoom*(d/pinchStartDist)));
+      zoom=nz; applyTransform();
+    }
+  }
+});
+['pointerup','pointercancel','pointerleave'].forEach(ev=>{
+  viewport.addEventListener(ev,(e)=>{
+    if(e.pointerType==='touch'){
+      activePtrs.delete(e.pointerId);
+      if(activePtrs.size<2){ pinchStartDist=0; }
+    }
+  });
+});
+
+// ===== Open/Close =====
+function animateOpen(){
+  viewport.animate(
+    [{transform:'scale(0.94)', opacity:0},{transform:'scale(1)', opacity:1}],
+    {duration:220, easing:'cubic-bezier(.2,.7,.2,1)'}
+  );
+}
+function setLayerBG(el, src){ el.style.backgroundImage = `url("${src}")`; }
+
+async function openLightbox(index){
+  const screens = document.querySelectorAll(".apk-screenshots img");
+  if (!screens.length) return;
+  currentIndex = index;
+  const src = screens[currentIndex].src;
+
+  const sz = await preload(src);
+  naturalW = sz.w; naturalH = sz.h;
+
+  lockScroll(true);
+  lightbox.classList.add('open');
+
+  resetView(); computeBaseSize();
+  setLayerBG(layerA, src);
+  layerA.classList.add('show');
+  layerB.classList.remove('show');
+
+  requestAnimationFrame(()=> animateOpen());
+  updateArrows(screens);
+  prefetchNeighbor();
+}
+function closeLightbox(){
+  lightbox.classList.remove('open');
+  setTimeout(()=>{ lockScroll(false); }, 200);
+}
+
+// Crossfade dasar
+let currentIsA = true;
+async function crossfadeTo(src){
+  const sz = await preload(src);
+  naturalW = sz.w; naturalH = sz.h;
+  computeBaseSize();
+
+  const next = currentIsA ? layerB : layerA;
+  const curr = currentIsA ? layerA : layerB;
+
+  setLayerBG(next, src);
+  next.getBoundingClientRect();
+  next.classList.add('show');
+  curr.classList.remove('show');
+
+  currentIsA = !currentIsA;
+}
+
+// Nav dasar
+function nextImage(){
+  const screens=document.querySelectorAll(".apk-screenshots img");
+  if(currentIndex < screens.length-1){
+    currentIndex++;
+    crossfadeTo(screens[currentIndex].src);
+    updateArrows(screens);
+    prefetchNeighbor();
+  }
+}
+function prevImage(){
+  const screens=document.querySelectorAll(".apk-screenshots img");
+  if(currentIndex > 0){
+    currentIndex--;
+    crossfadeTo(screens[currentIndex].src);
+    updateArrows(screens);
+    prefetchNeighbor();
+  }
+}
+
+// Bindings
+document.querySelectorAll(".apk-screenshots img").forEach((img,i)=>{
+  img.addEventListener('pointerup', ()=> openLightbox(i), {passive:true});
+});
+leftArrow.addEventListener('pointerup', e=>{ e.stopPropagation(); prevImage(); }, {passive:true});
+rightArrow.addEventListener('pointerup', e=>{ e.stopPropagation(); nextImage(); }, {passive:true});
+
+let closing=false;
+function handleClose(e){
+  e.preventDefault?.(); e.stopPropagation?.();
+  if(closing) return;
+  closing=true; closeLightbox();
+  setTimeout(()=> closing=false, 300);
+}
+closeBtn.addEventListener('pointerup', handleClose);
+closeBtn.addEventListener('click', handleClose);
+closeBtn.addEventListener('touchend', handleClose);
+
+// Keyboard: hanya panah kiri/kanan (tanpa ESC)
+document.addEventListener('keydown', e=>{
+  if(!lightbox.classList.contains('open')) return;
+  if(e.key==='ArrowRight') nextImage();
+  if(e.key==='ArrowLeft')  prevImage();
+});
+
+// Resize → jaga clamp
+window.addEventListener('resize', ()=>{
+  if(lightbox.classList.contains('open')){ computeBaseSize(); applyTransform(); }
+});
+
+// ===== Backdrop & ESC tidak menutup (hanya X) =====
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) { e.preventDefault(); e.stopImmediatePropagation(); }
+}, true);
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); }
+}, true);
+
+// ===== Share button (SVG) =====
+const shareBtn = (() => {
+  const b = document.createElement('button');
+  b.id = 'shareBtn';
+  b.className = 'lightbox-share';
+  b.setAttribute('aria-label','Bagikan screenshot');
+  b.innerHTML = `
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 3h7v7"/><path d="M21 3L12 12"/><path d="M5 12v6a3 3 0 0 0 3 3h8"/>
+    </svg>`;
+  lightbox.insertBefore(b, closeBtn);
+  return b;
+})();
+let toastEl = null, toastTimer = null;
+function toast(msg){
+  if (!toastEl){
+    toastEl = document.createElement('div');
+    toastEl.className = 'lb-toast';
+    lightbox.appendChild(toastEl);
+  }
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> toastEl.classList.remove('show'), 1400);
+}
+async function shareCurrent(){
+  const screens = document.querySelectorAll('.apk-screenshots img');
+  const img = screens[currentIndex];
+  if (!img) return;
+  const url = img.src;
+  const title = document.querySelector('.apk-title')?.textContent?.trim() || 'Screenshot';
+  const text = `${title} — Screenshot ${currentIndex+1}`;
+  if (navigator.share){
+    try{ await navigator.share({ title, text, url }); return; } catch(_){}
+  }
+  try{ await navigator.clipboard.writeText(url); toast('Link gambar disalin 📋'); }
+  catch(_){ window.open(url, '_blank', 'noopener'); }
+}
+shareBtn.addEventListener('pointerup', (e)=>{ e.preventDefault(); shareCurrent(); }, { passive:true });
+
+// ===== Slide antar gambar KHUSUS saat zoom>1 (overscroll di tepi) =====
+const EDGE_TRIGGER = 72;   // px
+const SLIDE_DUR = 220;     // ms
+let edgePull = 0, isSliding = false;
+
+viewport.addEventListener('pointerdown', () => { edgePull = 0; }, true);
+viewport.addEventListener('pointermove', (e) => {
+  if (zoom === 1 || !isPanning) { edgePull = 0; viewport.classList.remove('can-edge-left','can-edge-right'); return; }
+  const intendedX = e.clientX - startPX;
+  const maxX = Math.max(0, (baseW*zoom - baseW)/2);
+  if (intendedX >  maxX){ edgePull = intendedX -  maxX;  viewport.classList.add('can-edge-right'); viewport.classList.remove('can-edge-left'); }
+  else if (intendedX < -maxX){ edgePull = intendedX +  maxX; viewport.classList.add('can-edge-left');  viewport.classList.remove('can-edge-right'); }
+  else { edgePull = 0; viewport.classList.remove('can-edge-left','can-edge-right'); }
+}, true);
+viewport.addEventListener('pointerup', () => {
+  if (zoom === 1) { edgePull = 0; return; }
+  const pull = edgePull; edgePull = 0;
+  viewport.classList.remove('can-edge-left','can-edge-right');
+  if (Math.abs(pull) >= EDGE_TRIGGER){
+    if (pull < 0) slideTo(+1); else slideTo(-1);
+  }
+}, true);
+
+async function slideTo(dir){
+  if (isSliding) return;
+  const screens = document.querySelectorAll('.apk-screenshots img');
+  const targetIndex = currentIndex + dir;
+  if (targetIndex < 0 || targetIndex >= screens.length) return;
+
+  isSliding = true;
+  const src = screens[targetIndex].src;
+  const sz = await preload(src);
+  naturalW = sz.w; naturalH = sz.h; computeBaseSize();
+
+  const next = currentIsA ? layerB : layerA;
+  const curr = currentIsA ? layerA : layerB;
+
+  setLayerBG(next, src);
+
+  next.style.transition = 'none';
+  curr.style.transition = 'none';
+  next.style.opacity = '1';
+  curr.style.opacity = '1';
+  next.style.transform = `translateX(${dir*100}%)`;
+  curr.style.transform = `translateX(0%)`;
+  next.getBoundingClientRect();
+
+  const trans = `transform ${SLIDE_DUR}ms cubic-bezier(.2,.7,.2,1)`;
+  next.style.transition = trans; curr.style.transition = trans;
+  next.style.transform = 'translateX(0%)';
+  curr.style.transform = `translateX(${-dir*100}%)`;
+
+  const onDone = () => {
+    next.removeEventListener('transitionend', onDone);
+    curr.style.transition = ''; next.style.transition = '';
+    curr.style.opacity = '0';
+    curr.style.transform = ''; next.style.transform = '';
+    currentIsA = !currentIsA;
+    currentIndex = targetIndex;
+    updateArrows(screens);
+    panX = 0; panY = 0; applyTransform();
+    isSliding = false;
+    prefetchNeighbor();
+  };
+  next.addEventListener('transitionend', onDone);
+}
+
+// Prefetch kiri/kanan
+function prefetchNeighbor(){
+  const screens = document.querySelectorAll('.apk-screenshots img');
+  [currentIndex-1, currentIndex+1].forEach(i => {
+    if (i >= 0 && i < screens.length){
+      const im = new Image(); im.decoding='async'; im.src = screens[i].src;
+    }
+  });
+}
+
+/* ===== Form Auto-restore (tetap) ===== */
 window.addEventListener("DOMContentLoaded", ()=>{
   document.querySelectorAll("#apkCardForm input,#apkCardForm textarea").forEach(input=>{
     const saved=localStorage.getItem(input.id); if(saved!==null){input.value=saved;}
