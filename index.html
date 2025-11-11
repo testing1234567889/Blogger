@@ -2,229 +2,278 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>APK Card Generator - GxMods Next Level</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Generator HTML card APK MOD by GxMods dengan UI Futuristik Next Level">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>APK Card</title>
+
 <style>
-/* ========== Animated Aurora Background (tetap) ========== */
-body {
-  margin: 0; padding: 20px;
-  font-family: 'Inter', 'Segoe UI', sans-serif;
-  background: linear-gradient(270deg, #0f0c29, #302b63, #24243e);
-  background-size: 600% 600%;
-  animation: bgShift 20s ease infinite;
-  color: #e5e5e5;
-}
-@keyframes bgShift {
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
+/* ==== BASE KAMU (dipertahankan) ===================================== */
+/* Reset + box-sizing */
+* { box-sizing: border-box; margin:0; padding:0; }
 
-/* ========== Form Container (tetap) ========== */
-.form-container {
-  max-width: 960px; margin: 20px auto; padding: 32px;
-  border-radius: 24px; background: rgba(20, 20, 30, 0.75);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 255, 224, 0.15);
-  box-shadow: 0 8px 30px rgba(0, 255, 224, 0.15);
-  animation: fadeIn 0.6s ease;
-}
-h2 {
-  text-align: center; margin-bottom: 28px;
-  font-size: 1.8rem; font-weight: 700;
-  background: linear-gradient(90deg, #00ffe0, #4fc3f7);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}
-
-/* ========== Form Layout (tetap) ========== */
-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-form > div { display: flex; flex-direction: column; }
-label { margin-bottom: 8px; font-size: 0.9rem; color: #8be9fd; font-weight: 500; }
-input, textarea {
-  padding: 14px 16px; border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05); color: #fff;
-  transition: all .25s ease; font-size: 0.95rem;
-}
-input:focus, textarea:focus {
-  border-color: #00ffe0;
-  box-shadow: 0 0 12px rgba(0, 255, 224, 0.4);
-  outline: none;
-}
-textarea { resize: vertical; min-height: 90px; }
-.full { grid-column: 1 / -1; }
-@media(max-width: 720px) { form { grid-template-columns: 1fr; } }
-
-/* ========== Output Area & Buttons (tetap) ========== */
-.form-actions { grid-column: 1/-1; display: flex; justify-content: center; gap: 14px; margin-top: 8px; }
-button {
-  padding: 12px 26px; border: none; border-radius: 12px;
-  font-weight: 600; font-size: 0.95rem;
-  cursor: pointer; transition: all .3s ease;
-}
-.btn-generate { background: linear-gradient(135deg, #00ffe0, #4fc3f7); color: #0d0d0d; }
-.btn-copy { background: linear-gradient(135deg, #ff7eb3, #ff758c); color: #fff; }
-button:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 18px rgba(0,0,0,0.3); }
-#outputHTML {
-  width: 100%; height: 300px; margin-top: 22px; padding: 14px;
-  border-radius: 14px; background: rgba(10, 10, 15, 0.8);
-  border: 1px solid rgba(0,255,224,0.2);
-  color: #00ffe0; font-family: 'Fira Code', monospace; font-size: 0.85rem;
-}
-
-/* ========== APK Card Result (tetap) ========== */
+/* Card utama */
 .apk-post-card {
-  margin: 28px 0; padding: 28px;
-  border-radius: 20px; background: rgba(20, 20, 30, 0.85);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(0,255,224,0.25);
-  box-shadow: 0 12px 30px rgba(0,255,224,0.2);
-  transition: transform .4s ease, box-shadow .4s ease;
+  width: 95%;
+  max-width: 860px;
+  margin: 20px auto;
+  background: #1a1a1a;
+  color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.apk-post-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 40px rgba(0,255,224,0.5); }
-.apk-title { font-size: 1.5rem; font-weight: 700; color: #00ffe0; display: flex; align-items: center; gap: 8px; }
-.apk-developer a { color: #4fc3f7; font-size: 0.9rem; text-decoration: none; }
-.apk-developer a:hover { text-decoration: underline; }
-.stat-box { display: flex; gap: 14px; margin-top: 18px; }
-.stat-item { flex: 1; background: rgba(0,255,224,0.05); padding: 14px; border-radius: 14px; text-align: center; }
-.stat-value { font-size: 1.2rem; font-weight: 700; color: #fff; }
-.stat-label { font-size: 0.8rem; color: #aaa; }
+.apk-post-card:hover { transform: translateY(-2px); box-shadow:0 10px 25px rgba(0,0,0,0.4); }
 
-/* ========== Info APK Table (tetap) ========== */
-.apk-info { width: 100%; border-collapse: collapse; margin-top: 16px; }
-.apk-info th, .apk-info td { padding: 8px 10px; text-align: left; }
-.apk-info th { color: #ccc; font-weight: 700; font-size: 0.9rem; }
-.apk-info td { color: #f5f5f5; font-weight: 600; font-size: 0.95rem; }
-.apk-info th .icon-text { display: flex; align-items: center; gap: 6px; }
-.apk-info svg { flex-shrink: 0; fill: currentColor; }
+/* Header */
+.apk-header { display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+.apk-icon { width:80px; height:80px; border-radius:16px; object-fit:cover; }
+.apk-title-area { flex:1; }
+.apk-title { font-size:1.5rem; font-weight:600; display:flex; align-items:center; gap:6px; }
+.verified-icon { width:18px; height:18px; }
+.apk-developer { font-size:0.9rem; color:#aaa; }
 
-/* ========== Screenshots (generator default – akan di-override di bawah) ========== */
-.apk-screenshots { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; }
+/* Fitur MOD */
+.apk-tags ul {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.apk-tags li {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.95rem; font-weight: 600; color: #f5f5f5;
+  font-family: 'Inter', sans-serif;
+}
+.apk-tags li svg { width: 16px; height: 16px; fill: #00ff88; }
+
+/* Rating + stats */
+.stat-box {
+  display:flex; justify-content:space-between;
+  background-color:#1f1f1f;
+  border-radius:12px; padding:15px; margin:20px 0;
+  text-align:center;
+}
+.stat-item { flex:1; border-right:1px solid #333; padding:0 10px; }
+.stat-item:last-child { border-right:none; }
+.stat-value { font-size:20px; font-weight:bold; color:#fff; }
+.stat-label { font-size:12px; color:#aaa; }
+
+/* Section title */
+.apk-section-title {
+  font-size:1.1rem;
+  margin: 12px 0 6px;
+  padding-left:10px;
+  border-left:4px solid #00ffe0;
+  color:#eee;
+}
+
+/* Info APK */
+.apk-info { 
+  width: 100%; 
+  border-collapse: collapse; 
+  margin-top: 12px; 
+  font-size: 0.8rem;
+  table-layout: fixed; 
+}
+.apk-info th, 
+.apk-info td { 
+  padding: 6px 8px; 
+  background: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.apk-info th {
+  font-weight: 600;
+  color: #ccc;
+  text-align: left;
+  width: 50%;
+}
+.apk-info td {
+  font-weight: 400;
+  color: #f5f5f5;
+  text-align: left;
+  width: 72%;
+}
+.apk-info th svg {
+  flex-shrink: 0;
+  fill: currentColor;
+}
+.apk-info td a {
+  color: #4fc3f7;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.apk-info td a:hover { 
+  color: #00b0ff; 
+  text-decoration: underline;
+}
+.apk-info th .icon-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.apk-info th svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Deskripsi */
+.apk-description {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.95rem; line-height: 1.6; color: #eaeaea;
+  background-color: #1e1e1e;
+  padding: 12px 16px; border-radius: 12px;
+  text-align: justify; word-break: break-word;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.15);
+}
+.apk-description a { color: #4fc3f7; text-decoration: underline; }
+.apk-description a:hover { color: #00b0ff; text-decoration: none; }
+
+/* Screenshots */
+.apk-screenshots { display: flex; gap: 6px; overflow-x: auto; padding: 6px 0; scroll-snap-type: x mandatory; }
 .apk-screenshots img {
-  width: 150px; border-radius: 14px; cursor: pointer;
-  transition: transform .4s ease, filter .4s ease;
-  filter: brightness(0.95) contrast(1.2) saturate(1.15);
+  height: 180px; border-radius: 10px; flex-shrink: 0; cursor: pointer;
+  transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  opacity: 0; transform: scale(0.97);
 }
+.apk-screenshots img.loaded { opacity: 1; transform: scale(1); }
 .apk-screenshots img:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1) contrast(1.35) saturate(1.25) drop-shadow(0 0 6px rgba(0,0,0,0.6));
+  transform: scale(1.08);
+  filter: brightness(1.1) contrast(1.35) saturate(1.25);
+}
+.apk-screenshots img { scroll-snap-align: center; }
+
+/* Buttons */
+.apk-buttons { margin-top:24px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:12px; }
+.download-button {
+  background-color:#1e293b; color:#f8fafc; padding:14px 28px;
+  font-size:1rem; font-weight:600; border-radius:10px; border:1px solid #334155;
+  display:inline-flex; align-items:center; gap:10px; cursor:pointer;
+  text-decoration:none; transition:0.2s all;
+}
+.download-button:hover { background-color:#334155; transform:translateY(-2px); }
+
+/* Spinner */
+.spinner-area { display:none; flex-direction:column; align-items:center; gap:6px; }
+.spinner {
+  width:28px; height:28px; border:3px solid rgba(0,255,224,0.25);
+  border-top-color:#00ffe0; border-radius:50%;
+  animation:spin 0.8s linear infinite;
+}
+.downloading-text { font-size:0.9rem; color:#00ffe0; font-weight:500; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.lightbox img {
+  max-width: calc(100% - 120px);
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0,255,224,0.25);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  margin: auto;
+  display: block;
 }
 
-/* ========== Spinner (tetap) ========== */
-.spinner-area { display: none; align-items: center; gap: 10px; margin-top: 12px; }
-.spinner { width: 20px; height: 20px; border: 3px solid rgba(0,255,224,0.3); border-top: 3px solid #00ffe0; border-radius: 50%; animation: spin 1s linear infinite; }
-.downloading-text { font-size: 0.9rem; color: #00ffe0; }
-@keyframes spin { 100% { transform: rotate(360deg); } }
+/* Arrow style */
+.lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.45);
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+  color: #fff;
+  width: 64px; 
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.lightbox-arrow:hover {
+  background: rgba(0,0,0,0.65);
+  transform: translateY(-50%) scale(1.1);
+}
+.lightbox-arrow svg {
+  width: 32px; 
+  height: 32px;
+  stroke-width: 2.8;
+}
+.left-arrow { left: 10px; }
+.right-arrow { right: 10px; }
 
-/* ========== Verified Icon Blink (tetap) ========== */
-.verified-icon { animation: blinkBadge 2s infinite alternate; }
-@keyframes blinkBadge { from { filter: drop-shadow(0 0 2px #00ffe0); opacity: 0.6; } to { filter: drop-shadow(0 0 6px #00ffe0); opacity: 1; } }
+@media (max-width: 768px) {
+  .lightbox-arrow { width: 52px; height: 52px; }
+  .lightbox-arrow svg { width: 26px; height: 26px; }
+}
+@media (max-width: 480px) {
+  .lightbox-arrow { width: 46px; height: 46px; }
+  .lightbox-arrow svg { width: 22px; height: 22px; }
+}
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.6);
+  border: none;
+  color: white;
+  font-size: 28px;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  z-index: 10000;
+}
 
-/* ========== Tambahan agar animasi 'smoothBlink' di sample tidak error (opsional) ========== */
-@keyframes smoothBlink { 0%{opacity:.75} 50%{opacity:1} 100%{opacity:.75} }
-
-/* ===================================================================== */
-/* =======================  CSS DARI KODE KAMU  ======================== */
-/* ===================================================================== */
-
-/* ===== GLOBAL: anti tap-biru & no overscroll chain ===== */
-:root{ --tap-clear: rgba(0,0,0,0); scrollbar-gutter: stable both-edges; }
-html,body,*,a,button,img,svg{ -webkit-tap-highlight-color: var(--tap-clear); }
-html,body{ overscroll-behavior: none; }
-a,button{ -webkit-appearance:none; appearance:none; }
+/* ==== TAMBAHAN ANTI & LIGHTBOX LANJUTAN (dari versi sebelumnya) ===== */
+/* Anti tap-biru + overscroll chain break */
+:root { --tap-clear: rgba(0,0,0,0); scrollbar-gutter: stable both-edges; }
+html,body,*,a,button,img,svg { -webkit-tap-highlight-color: var(--tap-clear); }
+html,body { overscroll-behavior: none; }
+a,button { -webkit-appearance:none; appearance:none; }
 button,.download-button,.lightbox-arrow,.lightbox-close{
   outline:none!important; box-shadow:none!important;
   touch-action:manipulation; -webkit-user-select:none; user-select:none;
 }
 
-/* ===== UI LAIN (biarin) ===== */
-*{box-sizing:border-box;margin:0;padding:0}
-.apk-post-card{width:95%;max-width:860px;margin:20px auto;background:#1a1a1a;color:#fff;border-radius:16px;padding:20px;box-shadow:0 6px 20px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.05);transition:transform .2s,box-shadow .2s}
-.apk-post-card:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.4)}
-.apk-header{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.apk-icon{width:80px;height:80px;border-radius:16px;object-fit:cover}
-.apk-title{font-size:1.5rem;font-weight:600;display:flex;align-items:center;gap:6px}
-.verified-icon{width:18px;height:18px}
-.apk-developer{font-size:.9rem;color:#aaa}
-.stat-box{display:flex;justify-content:space-between;background:#1f1f1f;border-radius:12px;padding:15px;margin:20px 0;text-align:center}
-.stat-item{flex:1;border-right:1px solid #333;padding:0 10px}
-.stat-item:last-child{border-right:none}
-.stat-value{font-size:20px;font-weight:700;color:#fff}
-.stat-label{font-size:12px;color:#aaa}
-.apk-section-title{font-size:1.1rem;margin:12px 0 6px;padding-left:10px;border-left:4px solid #00ffe0;color:#eee}
-.apk-info{width:100%;border-collapse:collapse;margin-top:12px;font-size:.8rem;table-layout:fixed}
-.apk-info th,.apk-info td{padding:6px 8px;background:transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.apk-info th{font-weight:600;color:#ccc;text-align:left;width:50%}
-.apk-info td{font-weight:400;color:#f5f5f5;text-align:left;width:72%}
-.apk-info th .icon-text{display:flex;align-items:center;gap:6px}
-.apk-info th svg{flex-shrink:0;width:16px;height:16px;fill:currentColor}
-.apk-info td a{color:#4fc3f7;text-decoration:none;white-space:nowrap}
-.apk-info td a:hover{color:#00b0ff;text-decoration:underline}
-.apk-description{font-family:'Segoe UI',Roboto,sans-serif;font-size:.95rem;line-height:1.6;color:#eaeaea;background:#1e1e1e;padding:12px 16px;border-radius:12px;text-align:justify;word-break:break-word;box-shadow:inset 0 1px 2px rgba(0,0,0,.15)}
-.apk-description a{color:#4fc3f7;text-decoration:underline}
-.apk-description a:hover{color:#00b0ff;text-decoration:none}
-.apk-tags li svg{width:16px;height:16px;fill:#00ff88;flex-shrink:0}
-
-/* ===== SCREENSHOTS (override jadi horizontal scroll + efek loaded) ===== */
-.apk-screenshots img{ -webkit-tap-highlight-color: var(--tap-clear); }
-.apk-screenshots{
-  position:relative;display:flex;gap:10px;padding:8px 24px;
-  overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
-  scroll-snap-type:x mandatory; scroll-padding-inline:24px; justify-content:flex-start;
-}
-.apk-screenshots::-webkit-scrollbar{height:8px}
-.apk-screenshots::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
-.apk-screenshots{scrollbar-width:thin;scrollbar-color:#333 transparent}
-.apk-screenshots::before,.apk-screenshots::after{content:"";position:absolute;top:0;bottom:0;width:24px;pointer-events:none}
-.apk-screenshots::before{left:0;background:linear-gradient(90deg,rgba(0,0,0,.35),transparent)}
-.apk-screenshots::after{right:0;background:linear-gradient(-90deg,rgba(0,0,0,.35),transparent)}
-.apk-screenshots img{
-  height:180px;border-radius:10px;flex-shrink:0;scroll-snap-align:start;object-fit:cover;
-  transition:transform .22s,filter .22s,box-shadow .22s,opacity .25s;
-  opacity:0;transform:scale(.97);user-select:none;cursor:pointer
-}
-.apk-screenshots img.loaded{opacity:1;transform:scale(1)}
-.apk-screenshots img:hover{transform:scale(1.06);filter:brightness(1.08) contrast(1.2) saturate(1.15);box-shadow:0 6px 24px rgba(0,0,0,.35)}
-.apk-screenshots img:active{transform:scale(.94)}
-@media (max-width:768px){.apk-screenshots img{height:140px}}
-@media (max-width:480px){.apk-screenshots img{height:120px}}
-
-/* ===== LIGHTBOX ===== */
+/* Hide <img> dalam lightbox: pakai viewport layer */
 #lightboxImage{ display:none !important; }
-.lightbox{
-  position:fixed; inset:0; width:100vw; height:100dvh;
-  background:rgba(0,0,0,.55);
-  backdrop-filter: blur(8px) saturate(110%);
-  display:flex!important; justify-content:center; align-items:center; z-index:9999;
-  opacity:0; visibility:hidden; pointer-events:none;
-  transition: opacity .18s ease, visibility 0s linear .18s;
-  will-change: opacity, backdrop-filter;
-  contain: paint; isolation:isolate;
-  -webkit-backface-visibility:hidden; backface-visibility:hidden;
-  transform: translateZ(0);
-  overscroll-behavior:contain;
-  padding: max(0px, env(safe-area-inset-top))
-           env(safe-area-inset-right)
-           env(safe-area-inset-bottom)
-           env(safe-area-inset-left);
-}
-.lightbox.open{ opacity:1; visibility:visible; pointer-events:auto; transition: opacity .18s ease; }
 
-/* Viewport (di-zoom/pan) */
+/* Viewport & layers untuk pinch-zoom/pan & crossfade/slide */
 .lb-viewport{
   position:absolute; inset:0; margin:auto;
   width:calc(100% - 120px); max-width:100%;
   height:80vh; max-height:80vh;
   border-radius:12px; overflow:hidden;
   will-change: transform;
-  touch-action:none;   /* gesture diurus manual */
+  touch-action:none;
   cursor: grab;
   transform:translateZ(0); contain:layout paint style;
+  overscroll-behavior:contain;
 }
 .lb-viewport:active{ cursor: grabbing; }
-
-/* Dua layer untuk crossfade/slide */
 .lb-layer{
   position:absolute; inset:0;
   background-repeat:no-repeat;
@@ -236,97 +285,18 @@ button,.download-button,.lightbox-arrow,.lightbox-close{
 }
 .lb-layer.show{ opacity:1; }
 
-/* Panah & Close */
-.lightbox-nav{position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);pointer-events:none}
-.lightbox-arrow{
-  position:absolute;top:50%;transform:translateY(-50%);
-  background:rgba(0,0,0,.45);border:none;color:#fff;
-  width:64px;height:64px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  pointer-events:auto;cursor:pointer;transition:background .15s,transform .15s
-}
-.lightbox-arrow:hover{background:rgba(0,0,0,.65);transform:translateY(-50%) scale(1.08)}
-.lightbox-arrow svg{width:32px;height:32px;stroke-width:2.8}
-.left-arrow{left:10px} .right-arrow{right:10px}
-@media (max-width:768px){.lightbox-arrow{width:52px;height:52px}.lightbox-arrow svg{width:26px;height:26px}}
-@media (max-width:480px){.lightbox-arrow{width:46px;height:46px}.lightbox-arrow svg{width:22px;height:22px}}
-.lightbox-close{
-  position:absolute;top:20px;right:20px;background:rgba(0,0,0,.6);
-  border:none;color:#fff;font-size:28px;border-radius:50%;width:44px;height:44px;cursor:pointer;z-index:10000;
-}
-
-/* Share button + toast */
-.lightbox-share{
-  position:absolute; top:20px; right:72px;
-  background:rgba(0,0,0,.6); border:none; color:#fff;
-  border-radius:50%; width:44px; height:44px;
-  display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:10000;
-  transition:background .15s, transform .15s;
-}
-.lightbox-share:hover{ background:rgba(0,0,0,.7); transform:scale(1.06); }
-.lightbox-share:active{ transform:scale(.94); }
-.lightbox-share svg{ width:22px; height:22px; display:block; }
-@media (max-width:480px){ .lightbox-share{ width:40px;height:40px; right:66px; } }
-
-.lb-toast{
-  position:absolute; left:50%; bottom:24px; transform:translateX(-50%);
-  background:rgba(0,0,0,.75); color:#fff; padding:10px 14px; border-radius:10px;
-  font-size:.85rem; z-index:10001; pointer-events:none; opacity:0; 
-  transition:opacity .18s ease;
-}
-.lb-toast.show{ opacity:1; }
-
 /* Hint cursor saat tepi aktif untuk slide (zoom mode) */
 .lb-viewport.can-edge-left,
 .lb-viewport.can-edge-right{ cursor: ew-resize; }
 
-/* Download btn (biarin) */
-.apk-buttons{margin-top:24px;text-align:center}
-.download-button{background:#1e293b;color:#f8fafc;padding:14px 28px;font-size:1rem;font-weight:600;font-family:'Inter','Segoe UI',sans-serif;border-radius:10px;border:1px solid #334155;display:inline-flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer;transition:background-color .2s,box-shadow .2s,transform .2s;box-shadow:0 4px 6px rgba(0,0,0,.1)}
-.download-button:hover{background:#334155;transform:translateY(-2px);box-shadow:0 6px 10px rgba(0,0,0,.15)}
-.spinner-area{display:none;justify-content:center;align-items:center;flex-direction:column}
-.spinner{width:28px;height:28px;border:4px solid #fff;border-top:4px solid transparent;border-radius:50%;animation:spin .7s linear infinite;margin:10px auto}
-.downloading-text{font-size:.9rem;color:#fff;margin-top:10px}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* Reduced motion */
-@media (prefers-reduced-motion:reduce){
-  .lightbox,.lb-layer,.lb-viewport{transition:none!important}
-  .apk-screenshots img{ transition:none!important; }
-}
+/* Optional: animasi halus untuk teks “Link rusak?” */
+@keyframes smoothBlink { 0%{opacity:.75} 50%{opacity:1} 100%{opacity:.75} }
 </style>
 </head>
-<body>
-<div class="form-container">
-  <h2>🛠️ APK Card Generator - GxMods</h2>
-  <form id="apkCardForm">
-    <div><label for="appName">Nama Aplikasi</label><input id="appName"></div>
-    <div><label for="appDev">Developer</label><input id="appDev"></div>
-    <div><label for="devLink">Link Developer</label><input id="devLink"></div>
-    <div><label for="iconUrl">Icon URL</label><input id="iconUrl"></div>
-    <div><label for="appRating">Rating</label><input id="appRating"></div>
-    <div><label for="appReviews">Ulasan</label><input id="appReviews"></div>
-    <div><label for="appDownloads">Unduhan</label><input id="appDownloads"></div>
-    <div class="full"><label for="appDesc">Deskripsi Singkat</label><textarea id="appDesc"></textarea></div>
-    <div><label for="appVersion">Versi</label><input id="appVersion"></div>
-    <div><label for="appDate">Update</label><input id="appDate"></div>
-    <div><label for="appAndroid">Android Required</label><input id="appAndroid"></div>
-    <div><label for="appCategory">Kategori</label><input id="appCategory"></div>
-    <div><label for="cpuArch">CPU Architecture</label><input id="cpuArch"></div>
-    <div><label for="modFeatures">Fitur MOD (pisahkan dengan koma)</label><input id="modFeatures"></div>
-    <div><label for="downloadLink">Link Download</label><input id="downloadLink"></div>
-    <div><label for="apkSize">Ukuran APK (MB)</label><input id="apkSize"></div>
-    <div class="full"><label for="screenshots">Screenshot URLs (pisahkan dengan koma)</label><textarea id="screenshots"></textarea></div>
-    <div class="form-actions">
-      <button type="button" class="btn-generate" onclick="generateAPKCard()">🔧 Generate</button>
-      <button type="button" class="btn-copy" onclick="copyToClipboard()">📋 Salin</button>
-    </div>
-  </form>
-  <h3 style="margin-top:20px;color:#4fc3f7;">📄 Hasil Kode HTML:</h3>
-  <textarea id="outputHTML"></textarea>
-</div>
 
-<!-- Lightbox (struktur dari kode kamu; HTML tidak diubah) -->
+<body>
+
+<!-- Lightbox -->
 <div id="lightbox" class="lightbox" style="display:none;">
   <div class="lightbox-nav">
     <button class="lightbox-arrow left-arrow">
@@ -344,115 +314,92 @@ button,.download-button,.lightbox-arrow,.lightbox-close{
   <button id="closeBtn" class="lightbox-close">✕</button>
 </div>
 
-<script>
-/* ===== Proteksi ringan ===== */
-document.addEventListener('contextmenu', e => e.preventDefault());
-document.addEventListener('keydown', e => {
-  const blocked=['F12','PrintScreen'], ctrl=['c','u','s','a'];
-  if(blocked.includes(e.key) || (e.ctrlKey && ctrl.includes(e.key.toLowerCase()))) e.preventDefault();
-});
-document.addEventListener('selectstart', e => e.preventDefault());
-document.addEventListener('dragstart', e => e.preventDefault());
-
-/* ===== Generator (tetap) ===== */
-function generateAPKCard(){
-  const appName=document.getElementById("appName").value;
-  const appDev=document.getElementById("appDev").value;
-  const devLink=document.getElementById("devLink").value;
-  const iconUrl=document.getElementById("iconUrl").value;
-  const appRating=document.getElementById("appRating").value;
-  const appReviews=document.getElementById("appReviews").value;
-  const appDownloads=document.getElementById("appDownloads").value;
-  const appDesc=document.getElementById("appDesc").value;
-  const appVersion=document.getElementById("appVersion").value;
-  const appDate=document.getElementById("appDate").value;
-  const appAndroid=document.getElementById("appAndroid").value;
-  const appCategory=document.getElementById("appCategory").value;
-  const cpuArch=document.getElementById("cpuArch").value;
-  const modFeatures=document.getElementById("modFeatures").value.split(',').map(f=>f.trim()).filter(f=>f);
-  const screenshots=document.getElementById("screenshots").value.split(',').map(f=>f.trim()).filter(f=>f);
-  const downloadLink=document.getElementById("downloadLink").value;
-  const apkSize=document.getElementById("apkSize").value;
-
-  let screenshotHTML=screenshots.map((src,i)=>`<img src="${src}" alt="Screenshot ${i+1}" onclick="openLightbox(${i})">`).join('');
-  let modHTML = `<ul style="list-style:none;padding:0;margin:1em 0;">` +
-    modFeatures.map(f => `
-      <li style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:600;color:#f5f5f5;">
-        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M20.285 6.709l-11.285 11.292-5.285-5.292 1.414-1.414 3.871 3.878 9.871-9.878z"/></svg>
-        ${f}
-      </li>
-    `).join('') + `</ul>`;
-
-  const htmlOutput=`<!-- BEGIN APK CARD GENERATED -->
+<!-- BEGIN APK CARD GENERATED -->
 <div class="apk-post-card">
   <div style="display:flex;gap:12px;align-items:center;">
-    <img alt="App Icon" src="${iconUrl}" style="width:64px;height:64px;border-radius:14px;"/>
+    <img alt="App Icon" src="https://play-lh.googleusercontent.com/gGsUxZByKdJg-sdb2D7lP-opRVGr26vqJUPbdFAXf0kNdBzSeOYQUmsjeLDHwO1AKmp0=w240-h480-rw" style="width:64px;height:64px;border-radius:14px;"/>
     <div>
-      <div class="apk-title">${appName}<img alt="Verified" class="verified-icon" src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" style="width:18px;height:18px;"/></div>
-      <div class="apk-developer"><a href="${devLink}" target="_blank" rel="noopener noreferrer">${appDev}</a></div>
+      <div class="apk-title">Drama Queen<img alt="Verified" class="verified-icon" src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" style="width:18px;height:18px;"/></div>
+      <div class="apk-developer"><a href="https://play.google.com/store/apps/developer?id=Fun+Technologies+Studio&hl=id" target="_blank" rel="noopener noreferrer">Fun Technologies Studio</a></div>
     </div>
   </div>
 
   <div class="stat-box">
-    <div class="stat-item"><div class="stat-value">${appRating}</div><div class="stat-label">Rating</div></div>
-    <div class="stat-item"><div class="stat-value">${appReviews}</div><div class="stat-label">Ulasan</div></div>
-    <div class="stat-item"><div class="stat-value">${appDownloads}</div><div class="stat-label">Unduhan</div></div>
+    <div class="stat-item"><div class="stat-value">4,8</div><div class="stat-label">Rating</div></div>
+    <div class="stat-item"><div class="stat-value">181</div><div class="stat-label">Ulasan</div></div>
+    <div class="stat-item"><div class="stat-value">5 rb+</div><div class="stat-label">Unduhan</div></div>
   </div>
 
   <div class="apk-section-title"><b>Deskripsi</b></div>
-  <div class="apk-description">${appDesc}</div>
+  <div class="apk-description">Drama Queen adalah aplikasi streaming drama yang menghadirkan berbagai pilihan Drama Korea (Drakor), Drama China (Drachin), dan drama Asia lainnya langsung di genggamanmu. Nikmati pengalaman menonton yang nyaman, cepat, dan lengkap — kapan pun, di mana pun!
+
+Alternative Tupai Drama</div>
 
   <div class="apk-section-title"><b>Screenshot</b></div>
-  <div class="apk-screenshots">${screenshotHTML}</div>
+  <div class="apk-screenshots"><img src="https://play-lh.googleusercontent.com/yn4UAvtMvFZ_sl9vbd5T_TsfSbiSzB6NFbwqgxyybp1rGhI5KLtgjNnzhnDZOscGDA=w2560-h1440-rw" alt="Screenshot 1" onclick="openLightbox(0)"><img src="https://play-lh.googleusercontent.com/D642dn5I4aNS_rtDcEi-l8C0MfKU9SYn64Es1xRV3D0NS0x8Mp1L25VFX_06s649IPXM=w2560-h1440-rw" alt="Screenshot 2" onclick="openLightbox(1)"><img src="https://play-lh.googleusercontent.com/jCRDMCnCAkP2Z1gRm09uARPUkmapnJW94Nma1j5R5XDUYuR91ITbc9liBnPj80mUS24=w2560-h1440-rw" alt="Screenshot 3" onclick="openLightbox(2)"><img src="https://i.ibb.co.com/XkbXBsg7/Screenshot-20251026-015238-Drama-Queen.png" alt="Screenshot 4" onclick="openLightbox(3)"></div>
 
   <div class="apk-section-title"><b>Info APK</b></div>
   <table class="apk-info">
-    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M9 3h6v2H9zM5 7h14v2H5zM7 11h10v2H7zM9 15h6v2H9zM11 19h2v2h-2z"/></svg>Versi</div></th><td>${appVersion}</td></tr>
-    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 17H5V8h14v12z"/></svg>Update</div></th><td>${appDate}</td></tr>
-    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M17.6 9.48l1.43-2.49a.5.5 0 0 0-.86-.5l-1.45 2.52A8.14 8.14 0 0 0 12 8c-1.7 0-3.28.53-4.72 1.5L5.83 6.49a.5.5 0 0 0-.86.5l1.42 2.49A7.94 7.94 0 0 0 4 15v5a1 1 0 0 0 1 1h2v-6h2v6h6v-6h2v6h2a1 1 0 0 0 1-1v-5c0-2.23-.91-4.24-2.4-5.52z"/></svg>Minimal Android</div></th><td>${appAndroid}</td></tr>
-    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M9 3h6v2h2v2h2v6h-2v2h-2v2H9v-2H7v-2H5V7h2V5h2V3zM7 9v6h10V9H7z"/></svg>CPU Support</div></th><td>${cpuArch}</td></tr>
-    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 22a7.5 7.5 0 0 1 13 0"/></svg>Developer</div></th><td><a href="${devLink}" target="_blank" rel="noopener">${appDev}</a></td></tr>
-    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>Kategori</div></th><td>${appCategory}</td></tr>    
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M9 3h6v2H9zM5 7h14v2H5zM7 11h10v2H7zM9 15h6v2H9zM11 19h2v2h-2z"/></svg>Versi</div></th><td>0.1.21</td></tr>
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 17H5V8h14v12z"/></svg>Update</div></th><td>27 Okt 2025</td></tr>
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M17.6 9.48l1.43-2.49a.5.5 0 0 0-.86-.5l-1.45 2.52A8.14 8.14 0 0 0 12 8c-1.7 0-3.28.53-4.72 1.5L5.83 6.49a.5.5 0 0 0-.86.5l1.42 2.49A7.94 7.94 0 0 0 4 15v5a1 1 0 0 0 1 1h2v-6h2v6h6v-6h2v6h2a1 1 0 0 0 1-1v-5c0-2.23-.91-4.24-2.4-5.52z"/></svg>Minimal Android</div></th><td>6</td></tr>
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M9 3h6v2h2v2h2v6h-2v2h-2v2H9v-2H7v-2H5V7h2V5h2V3zM7 9v6h10V9H7z"/></svg>CPU Support</div></th><td>v8a</td></tr>
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 22a7.5 7.5 0 0 1 13 0"/></svg>Developer</div></th><td><a href="https://play.google.com/store/apps/developer?id=Fun+Technologies+Studio&hl=id" target="_blank" rel="noopener">Fun Technologies Studio</a></td></tr>
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>Kategori</div></th><td>Hiburan</td></tr>    
   </table>
 
   <div class="apk-section-title"><b>Fitur MOD</b></div>
-  <div class="apk-tags">${modHTML}</div>
+  <div class="apk-tags"><ul style="list-style:none;padding:0;margin:1em 0;">
+      <li style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:600;color:#f5f5f5;">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M20.285 6.709l-11.285 11.292-5.285-5.292 1.414-1.414 3.871 3.878 9.871-9.878z"/></svg>
+        PREMIUM
+      </li>
+    </ul></div>
 
   <div class="apk-buttons">
-    <a class="download-button" href="#" onclick="startDownload(event,'${downloadLink}')">⬇ Download${apkSize ? ` (${apkSize}MB)` : ""}</a>
+    <a class="download-button" href="#" onclick="startDownload(event,'https://shorturl.at/fx5h3')">⬇ Download (28.2MB)</a>
     <div class="spinner-area"><div class="spinner"></div><div class="downloading-text">Mengunduh file…</div></div>
     <p style="margin-top:12px;font-size:0.7rem;color:rgba(255,255,255,0.7);font-weight:500;animation:smoothBlink 3s ease-in-out infinite;">
       🚨 Link rusak? <a href="https://t.me/key_generatebot" target="_blank" style="color:dodgerblue;font-weight:500;">Hubungi saya di Telegram</a>.
     </p>
   </div>
 </div>
-<!-- END APK CARD -->`;
+<!-- END APK CARD -->
 
-  document.getElementById("outputHTML").value=htmlOutput;
-}
+<script>
+/* ===================== ANTI SEMUANYA ===================== */
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  const blocked = ['F12','PrintScreen'];
+  const ctrl = ['c','u','s','a'];
+  if (blocked.includes(e.key) || (e.ctrlKey && ctrl.includes(e.key.toLowerCase()))) e.preventDefault();
+});
+document.addEventListener('selectstart', e => e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
 
-function copyToClipboard(){
-  const output=document.getElementById("outputHTML");
-  navigator.clipboard.writeText(output.value).then(()=>alert("Kode HTML telah disalin!"));
-}
-
-/* ===== Download demo (biarin, disamakan dengan kode kamu) ===== */
+/* ===================== Download + Spinner ===================== */
 function startDownload(event, url){
   event.preventDefault();
-  const btn = event.currentTarget;
-  const area = btn.closest(".apk-buttons").querySelector(".spinner-area");
-  btn.style.display="none"; area.style.display="flex";
-  setTimeout(()=>{ area.style.display="none"; btn.style.display="inline-flex"; window.location.href=url; },2000);
+  const button = event.currentTarget;
+  const container = button.closest(".apk-buttons");
+  const spinnerArea = container.querySelector(".spinner-area");
+  button.style.display = "none";
+  spinnerArea.style.display = "flex";
+  setTimeout(()=>{
+    spinnerArea.style.display = "none";
+    button.style.display = "inline-flex";
+    window.open(url,"_blank");
+  }, 2000);
 }
 
-/* ===== Lightbox (viewport + 2 layers background) – dari kode kamu ===== */
+/* ===================== Lightbox Lanjutan (pinch, pan, edge-slide) ===================== */
 let currentIndex=0, naturalW=1, naturalH=1;
 const lightbox = document.getElementById("lightbox");
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
 const closeBtn = document.getElementById("closeBtn");
 
-// Viewport & layers
+/* Buat viewport & 2 layer (background-image) */
 const viewport = document.createElement('div');
 viewport.className = 'lb-viewport';
 const layerA = document.createElement('div');
@@ -463,7 +410,7 @@ viewport.appendChild(layerA);
 viewport.appendChild(layerB);
 lightbox.insertBefore(viewport, closeBtn);
 
-// Loaded class for thumbs
+/* Lazy + loaded class untuk thumbnails */
 document.querySelectorAll(".apk-screenshots img").forEach(img=>{
   img.setAttribute('loading','lazy');
   if(img.complete) img.classList.add("loaded");
@@ -475,7 +422,7 @@ function updateArrows(screens){
   rightArrow.style.display = currentIndex===screens.length-1?'none':'flex';
 }
 
-// Preload
+/* Preload ukuran asli */
 function preload(src){
   return new Promise((resolve)=>{
     const im = new Image();
@@ -483,11 +430,14 @@ function preload(src){
     im.onload=()=> resolve({w:im.naturalWidth||1, h:im.naturalHeight||1});
     im.onerror=()=> resolve({w:1,h:1});
     im.src = src;
-    if(im.decode){ im.decode().then(()=>resolve({w:im.naturalWidth||1,h:im.naturalHeight||1})).catch(()=>resolve({w:im.naturalWidth||1,h:im.naturalHeight||1})); }
+    if(im.decode){
+      im.decode().then(()=>resolve({w:im.naturalWidth||1,h:im.naturalHeight||1}))
+                 .catch(()=>resolve({w:im.naturalWidth||1,h:im.naturalHeight||1}));
+    }
   });
 }
 
-// Scroll lock
+/* Lock scroll saat lightbox terbuka */
 function lockScroll(lock){
   const html = document.documentElement;
   if(lock){
@@ -500,7 +450,7 @@ function lockScroll(lock){
   }
 }
 
-// ===== Zoom (PINCH only) & Pan =====
+/* Zoom & Pan */
 let zoom=1, panX=0, panY=0, isPanning=false, startPX=0, startPY=0;
 let baseW=0, baseH=0;
 
@@ -525,9 +475,7 @@ function resetView(){
   viewport.style.transform = 'translate(0px, 0px) scale(1)';
 }
 
-// NO wheel / NO double-tap: ditiadakan
-
-// Pan saat zoom>1
+/* Pan hanya saat zoom>1 */
 viewport.addEventListener('pointerdown', (e)=>{
   if(zoom===1) return;
   isPanning=true;
@@ -549,7 +497,7 @@ viewport.addEventListener('pointermove', (e)=>{
   });
 });
 
-// Pinch zoom (touch 2 jari)
+/* Pinch zoom 2 jari (touch) */
 const activePtrs=new Map();
 let pinchStartDist=0, pinchStartZoom=1;
 viewport.addEventListener('pointerdown',(e)=>{
@@ -576,42 +524,34 @@ viewport.addEventListener('pointermove',(e)=>{
   });
 });
 
-// ===== Open/Close =====
-function animateOpen(){
-  viewport.animate(
-    [{transform:'scale(0.94)', opacity:0},{transform:'scale(1)', opacity:1}],
-    {duration:220, easing:'cubic-bezier(.2,.7,.2,1)'}
-  );
-}
+/* Open / Close */
 function setLayerBG(el, src){ el.style.backgroundImage = `url("${src}")`; }
-
 async function openLightbox(index){
   const screens = document.querySelectorAll(".apk-screenshots img");
-  if (!screens.length) return;
+  if(!screens.length) return;
   currentIndex = index;
   const src = screens[currentIndex].src;
 
   const sz = await preload(src);
   naturalW = sz.w; naturalH = sz.h;
 
+  lightbox.style.display = "flex";
   lockScroll(true);
-  lightbox.classList.add('open');
 
   resetView(); computeBaseSize();
   setLayerBG(layerA, src);
   layerA.classList.add('show');
   layerB.classList.remove('show');
 
-  requestAnimationFrame(()=> animateOpen());
   updateArrows(screens);
   prefetchNeighbor();
 }
 function closeLightbox(){
-  lightbox.classList.remove('open');
-  setTimeout(()=>{ lockScroll(false); }, 200);
+  lightbox.style.display = "none";
+  lockScroll(false);
 }
 
-// Crossfade dasar
+/* Crossfade antar gambar */
 let currentIsA = true;
 async function crossfadeTo(src){
   const sz = await preload(src);
@@ -629,7 +569,7 @@ async function crossfadeTo(src){
   currentIsA = !currentIsA;
 }
 
-// Nav dasar
+/* Navigasi dasar */
 function nextImage(){
   const screens=document.querySelectorAll(".apk-screenshots img");
   if(currentIndex < screens.length-1){
@@ -649,87 +589,36 @@ function prevImage(){
   }
 }
 
-// Bindings
-document.querySelectorAll(".apk-screenshots img").forEach((img,i)=>{
-  img.addEventListener('pointerup', ()=> openLightbox(i), {passive:true});
-});
-leftArrow.addEventListener('pointerup', e=>{ e.stopPropagation(); prevImage(); }, {passive:true});
-rightArrow.addEventListener('pointerup', e=>{ e.stopPropagation(); nextImage(); }, {passive:true});
+/* Binding tombol */
+leftArrow.addEventListener("click", e=>{ e.stopPropagation(); prevImage(); });
+rightArrow.addEventListener("click", e=>{ e.stopPropagation(); nextImage(); });
 
-let closing=false;
+/* Hanya tombol ❌ yang boleh close (backdrop & ESC diblok) */
 function handleClose(e){
   e.preventDefault?.(); e.stopPropagation?.();
-  if(closing) return;
-  closing=true; closeLightbox();
-  setTimeout(()=> closing=false, 300);
+  closeLightbox();
 }
-closeBtn.addEventListener('pointerup', handleClose);
-closeBtn.addEventListener('click', handleClose);
-closeBtn.addEventListener('touchend', handleClose);
+closeBtn.addEventListener("click", handleClose);
 
-// Keyboard: hanya panah kiri/kanan (tanpa ESC)
-document.addEventListener('keydown', e=>{
-  if(!lightbox.classList.contains('open')) return;
-  if(e.key==='ArrowRight') nextImage();
-  if(e.key==='ArrowLeft')  prevImage();
-});
-
-// Resize → jaga clamp
-window.addEventListener('resize', ()=>{
-  if(lightbox.classList.contains('open')){ computeBaseSize(); applyTransform(); }
-});
-
-// ===== Backdrop & ESC tidak menutup (hanya X) =====
+/* Blok backdrop click menutup */
 lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) { e.preventDefault(); e.stopImmediatePropagation(); }
 }, true);
-document.addEventListener('keydown', (e) => {
-  if (!lightbox.classList.contains('open')) return;
-  if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); }
-}, true);
 
-// ===== Share button (SVG) =====
-const shareBtn = (() => {
-  const b = document.createElement('button');
-  b.id = 'shareBtn';
-  b.className = 'lightbox-share';
-  b.setAttribute('aria-label','Bagikan screenshot');
-  b.innerHTML = `
-    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
-         stroke-linecap="round" stroke-linejoin="round">
-      <path d="M14 3h7v7"/><path d="M21 3L12 12"/><path d="M5 12v6a3 3 0 0 0 3 3h8"/>
-    </svg>`;
-  lightbox.insertBefore(b, closeBtn);
-  return b;
-})();
-let toastEl = null, toastTimer = null;
-function toast(msg){
-  if (!toastEl){
-    toastEl = document.createElement('div');
-    toastEl.className = 'lb-toast';
-    lightbox.appendChild(toastEl);
-  }
-  toastEl.textContent = msg;
-  toastEl.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=> toastEl.classList.remove('show'), 1400);
-}
-async function shareCurrent(){
-  const screens = document.querySelectorAll('.apk-screenshots img');
-  const img = screens[currentIndex];
-  if (!img) return;
-  const url = img.src;
-  const title = document.querySelector('.apk-title')?.textContent?.trim() || 'Screenshot';
-  const text = `${title} — Screenshot ${currentIndex+1}`;
-  if (navigator.share){
-    try{ await navigator.share({ title, text, url }); return; } catch(_){}
-  }
-  try{ await navigator.clipboard.writeText(url); toast('Link gambar disalin 📋'); }
-  catch(_){ window.open(url, '_blank', 'noopener'); }
-}
-shareBtn.addEventListener('pointerup', (e)=>{ e.preventDefault(); shareCurrent(); }, { passive:true });
+/* Keyboard: cuma panah kiri/kanan; ESC diblok */
+document.addEventListener("keydown", e => {
+  if(lightbox.style.display !== "flex") return;
+  if(e.key === "ArrowRight") nextImage();
+  if(e.key === "ArrowLeft")  prevImage();
+  if(e.key === "Escape"){ e.preventDefault(); e.stopImmediatePropagation(); }
+});
 
-// ===== Slide antar gambar KHUSUS saat zoom>1 (overscroll di tepi) =====
+/* Resize jaga clamp */
+window.addEventListener('resize', ()=>{
+  if(lightbox.style.display === "flex"){ computeBaseSize(); applyTransform(); }
+});
+
+/* Edge slide saat zoom>1 (tarik melewati tepi) */
 const EDGE_TRIGGER = 72;   // px
 const SLIDE_DUR = 220;     // ms
 let edgePull = 0, isSliding = false;
@@ -796,7 +685,7 @@ async function slideTo(dir){
   next.addEventListener('transitionend', onDone);
 }
 
-// Prefetch kiri/kanan
+/* Prefetch kiri/kanan */
 function prefetchNeighbor(){
   const screens = document.querySelectorAll('.apk-screenshots img');
   [currentIndex-1, currentIndex+1].forEach(i => {
@@ -806,12 +695,10 @@ function prefetchNeighbor(){
   });
 }
 
-/* ===== Form Auto-restore (tetap) ===== */
-window.addEventListener("DOMContentLoaded", ()=>{
-  document.querySelectorAll("#apkCardForm input,#apkCardForm textarea").forEach(input=>{
-    const saved=localStorage.getItem(input.id); if(saved!==null){input.value=saved;}
-    input.addEventListener("input",()=>{localStorage.setItem(input.id,input.value);});
-  });
+/* Screenshot Loader Fix (kelas .loaded) */
+document.querySelectorAll(".apk-screenshots img").forEach(img=>{
+  if(img.complete) img.classList.add("loaded");
+  else img.addEventListener("load", ()=> img.classList.add("loaded"));
 });
 </script>
 </body>
