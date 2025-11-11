@@ -1,14 +1,143 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>APK Card</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>APK Card Generator (Anti + Lightbox Advanced, No Share)</title>
+<style>
+  /* ====== UI Generator (ringkas biar nyaman dipakai) ====== */
+  :root{color-scheme:dark light}
+  body{margin:0;padding:24px;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:#0b0f15;color:#e6f2ff}
+  .wrap{max-width:980px;margin:0 auto}
+  h1{margin:0 0 18px;font-size:1.6rem;letter-spacing:.2px}
+  .card{background:#0f1722;border:1px solid #133045;border-radius:16px;box-shadow:0 8px 22px rgba(0,0,0,.35);padding:18px}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .grid .full{grid-column:1/-1}
+  label{font-size:.85rem;color:#7cc7ff;margin-bottom:6px;display:block}
+  input,textarea{width:100%;border:1px solid #244867;background:#0b1520;border-radius:10px;color:#e6f2ff;padding:12px 12px;font-size:.95rem}
+  textarea{min-height:90px;resize:vertical}
+  .actions{display:flex;gap:12px;align-items:center;margin-top:6px}
+  button{border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer}
+  .btn-gen{background:#00ffe0;color:#082026}
+  .btn-copy{background:#ff7a9e;color:white}
+  .outbox{margin-top:16px}
+  #outputHTML{width:100%;height:360px}
+  .hint{font-size:.82rem;color:#9ccaf2;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>APK Card Generator (Lightbox Advanced + Anti, No Share)</h1>
+  <div class="card">
+    <div class="grid">
+      <div><label>Nama Aplikasi</label><input id="appName" value="Drama Queen"></div>
+      <div><label>Developer (nama)</label><input id="appDev" value="Fun Technologies Studio"></div>
+      <div><label>Link Developer</label><input id="devLink" value="https://play.google.com/store/apps/developer?id=Fun+Technologies+Studio&hl=id"></div>
+      <div><label>Icon URL</label><input id="iconUrl" value="https://play-lh.googleusercontent.com/gGsUxZByKdJg-sdb2D7lP-opRVGr26vqJUPbdFAXf0kNdBzSeOYQUmsjeLDHwO1AKmp0=w240-h480-rw"></div>
+
+      <div><label>Rating</label><input id="appRating" value="4,8"></div>
+      <div><label>Ulasan</label><input id="appReviews" value="181"></div>
+      <div><label>Unduhan</label><input id="appDownloads" value="5 rb+"></div>
+      <div class="full"><label>Deskripsi</label><textarea id="appDesc">Drama Queen adalah aplikasi streaming drama yang menghadirkan berbagai pilihan Drama Korea (Drakor), Drama China (Drachin), dan drama Asia lainnya langsung di genggamanmu. Nikmati pengalaman menonton yang nyaman, cepat, dan lengkap — kapan pun, di mana pun!
+
+Alternative Tupai Drama</textarea></div>
+
+      <div><label>Versi</label><input id="appVersion" value="0.1.21"></div>
+      <div><label>Update</label><input id="appDate" value="27 Okt 2025"></div>
+      <div><label>Minimal Android</label><input id="appAndroid" value="6"></div>
+      <div><label>CPU Support</label><input id="cpuArch" value="v8a"></div>
+      <div class="full"><label>Kategori</label><input id="appCategory" value="Hiburan"></div>
+
+      <div class="full"><label>Fitur MOD (pisahkan koma)</label><input id="modFeatures" value="PREMIUM"></div>
+
+      <div><label>Link Download</label><input id="downloadLink" value="https://shorturl.at/fx5h3"></div>
+      <div><label>Ukuran APK (MB)</label><input id="apkSize" value="28.2"></div>
+
+      <div class="full"><label>Screenshot URLs (pisahkan koma)</label>
+        <textarea id="screenshots">https://play-lh.googleusercontent.com/yn4UAvtMvFZ_sl9vbd5T_TsfSbiSzB6NFbwqgxyybp1rGhI5KLtgjNnzhnDZOscGDA=w2560-h1440-rw, https://play-lh.googleusercontent.com/D642dn5I4aNS_rtDcEi-l8C0MfKU9SYn64Es1xRV3D0NS0x8Mp1L25VFX_06s649IPXM=w2560-h1440-rw, https://play-lh.googleusercontent.com/jCRDMCnCAkP2Z1gRm09uARPUkmapnJW94Nma1j5R5XDUYuR91ITbc9liBnPj80mUS24=w2560-h1440-rw, https://i.ibb.co.com/XkbXBsg7/Screenshot-20251026-015238-Drama-Queen.png</textarea>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn-gen" onclick="generateAPKCard()">Generate</button>
+      <button class="btn-copy" onclick="copyOut()">Salin</button>
+    </div>
+
+    <div class="outbox">
+      <textarea id="outputHTML" spellcheck="false"></textarea>
+      <div class="hint">Hasil sudah lengkap: Lightbox + Anti + tanpa tombol bagikan. Tempel ke halaman manapun.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function escHTML(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function generateAPKCard(){
+  const appName = document.getElementById('appName').value.trim();
+  const appDev = document.getElementById('appDev').value.trim();
+  const devLink = document.getElementById('devLink').value.trim();
+  const iconUrl = document.getElementById('iconUrl').value.trim();
+
+  const appRating = document.getElementById('appRating').value.trim();
+  const appReviews = document.getElementById('appReviews').value.trim();
+  const appDownloads = document.getElementById('appDownloads').value.trim();
+
+  const appDesc = document.getElementById('appDesc').value;
+
+  const appVersion = document.getElementById('appVersion').value.trim();
+  const appDate = document.getElementById('appDate').value.trim();
+  const appAndroid = document.getElementById('appAndroid').value.trim();
+  const cpuArch = document.getElementById('cpuArch').value.trim();
+  const appCategory = document.getElementById('appCategory').value.trim();
+
+  const modFeatures = document.getElementById('modFeatures').value.split(',').map(s=>s.trim()).filter(Boolean);
+
+  const downloadLink = document.getElementById('downloadLink').value.trim();
+  const apkSize = document.getElementById('apkSize').value.trim();
+
+  const screenshots = document.getElementById('screenshots').value.split(',').map(s=>s.trim()).filter(Boolean);
+
+  const screenshotsHTML = screenshots.map((src,i)=>`<img src="${src}" alt="Screenshot ${i+1}" onclick="openLightbox(${i})">`).join('');
+
+  const modHTML = `<ul style="list-style:none;padding:0;margin:1em 0;">${
+    modFeatures.map(f=>`
+      <li style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:600;color:#f5f5f5;">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M20.285 6.709l-11.285 11.292-5.285-5.292 1.414-1.414 3.871 3.878 9.871-9.878z"/></svg>
+        ${escHTML(f)}
+      </li>`).join('')
+  }</ul>`;
+
+  const html = `<!-- Lightbox -->
+<div id="lightbox" class="lightbox" style="display:none;">
+  <div class="lightbox-nav">
+    <button class="lightbox-arrow left-arrow">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+        <path d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    <button class="lightbox-arrow right-arrow">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+        <path d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+  <img id="lightboxImage" src="" />
+  <button id="closeBtn" class="lightbox-close">✕</button>
+</div>
 
 <style>
-/* ==== BASE KAMU (dipertahankan) ===================================== */
 /* Reset + box-sizing */
 * { box-sizing: border-box; margin:0; padding:0; }
+
+/* ===== Anti tap-biru & overscroll chain break ===== */
+:root{ --tap-clear: rgba(0,0,0,0); scrollbar-gutter: stable both-edges; }
+html,body,*,a,button,img,svg{ -webkit-tap-highlight-color: var(--tap-clear); }
+html,body{ overscroll-behavior: none; }
+a,button{ -webkit-appearance:none; appearance:none; }
+button,.download-button,.lightbox-arrow,.lightbox-close{
+  outline:none!important; box-shadow:none!important;
+  touch-action:manipulation; -webkit-user-select:none; user-select:none;
+}
 
 /* Card utama */
 .apk-post-card {
@@ -94,30 +223,10 @@
   text-align: left;
   width: 72%;
 }
-.apk-info th svg {
-  flex-shrink: 0;
-  fill: currentColor;
-}
-.apk-info td a {
-  color: #4fc3f7;
-  text-decoration: none;
-  white-space: nowrap;
-}
-.apk-info td a:hover { 
-  color: #00b0ff; 
-  text-decoration: underline;
-}
-.apk-info th .icon-text {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.apk-info th svg {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-}
+.apk-info th .icon-text { display:flex; align-items:center; gap:6px; }
+.apk-info th svg { flex-shrink:0; width:16px; height:16px; fill:currentColor; }
+.apk-info td a { color:#4fc3f7; text-decoration:none; white-space:nowrap; }
+.apk-info td a:hover { color:#00b0ff; text-decoration:underline; }
 
 /* Deskripsi */
 .apk-description {
@@ -132,232 +241,122 @@
 .apk-description a:hover { color: #00b0ff; text-decoration: none; }
 
 /* Screenshots */
-.apk-screenshots { display: flex; gap: 6px; overflow-x: auto; padding: 6px 0; scroll-snap-type: x mandatory; }
+.apk-screenshots { display:flex; gap:6px; overflow-x:auto; padding:6px 0; scroll-snap-type:x mandatory; }
 .apk-screenshots img {
-  height: 180px; border-radius: 10px; flex-shrink: 0; cursor: pointer;
-  transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
-  opacity: 0; transform: scale(0.97);
+  height:180px; border-radius:10px; flex-shrink:0; cursor:pointer;
+  transition: transform .25s ease, filter .25s ease, box-shadow .25s ease, opacity .25s ease;
+  opacity:0; transform:scale(.97);
 }
-.apk-screenshots img.loaded { opacity: 1; transform: scale(1); }
-.apk-screenshots img:hover {
-  transform: scale(1.08);
-  filter: brightness(1.1) contrast(1.35) saturate(1.25);
-}
-.apk-screenshots img { scroll-snap-align: center; }
+.apk-screenshots img.loaded{ opacity:1; transform:scale(1); }
+.apk-screenshots img:hover{ transform:scale(1.08); filter:brightness(1.1) contrast(1.35) saturate(1.25); }
+.apk-screenshots img{ scroll-snap-align:center; }
 
 /* Buttons */
-.apk-buttons { margin-top:24px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:12px; }
-.download-button {
-  background-color:#1e293b; color:#f8fafc; padding:14px 28px;
-  font-size:1rem; font-weight:600; border-radius:10px; border:1px solid #334155;
-  display:inline-flex; align-items:center; gap:10px; cursor:pointer;
-  text-decoration:none; transition:0.2s all;
+.apk-buttons{ margin-top:24px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:12px; }
+.download-button{
+  background:#1e293b; color:#f8fafc; padding:14px 28px; font-size:1rem; font-weight:600;
+  border-radius:10px; border:1px solid #334155; display:inline-flex; align-items:center; gap:10px;
+  cursor:pointer; text-decoration:none; transition:.2s all;
 }
-.download-button:hover { background-color:#334155; transform:translateY(-2px); }
+.download-button:hover{ background:#334155; transform:translateY(-2px); }
 
 /* Spinner */
-.spinner-area { display:none; flex-direction:column; align-items:center; gap:6px; }
-.spinner {
-  width:28px; height:28px; border:3px solid rgba(0,255,224,0.25);
-  border-top-color:#00ffe0; border-radius:50%;
-  animation:spin 0.8s linear infinite;
-}
-.downloading-text { font-size:0.9rem; color:#00ffe0; font-weight:500; }
-@keyframes spin { to { transform:rotate(360deg); } }
+.spinner-area{ display:none; flex-direction:column; align-items:center; gap:6px; }
+.spinner{ width:28px; height:28px; border:3px solid rgba(0,255,224,.25); border-top-color:#00ffe0; border-radius:50%; animation:spin .8s linear infinite; }
+.downloading-text{ font-size:.9rem; color:#00ffe0; font-weight:500; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
 
-/* Lightbox */
-.lightbox {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+/* Lightbox (dasar) */
+.lightbox{
+  position:fixed; inset:0; width:100vw; height:100vh;
+  background:rgba(0,0,0,.6); backdrop-filter:blur(10px);
+  display:none; justify-content:center; align-items:center; z-index:9999;
 }
-.lightbox img {
-  max-width: calc(100% - 120px);
-  max-height: 80vh;
-  border-radius: 12px;
-  box-shadow: 0 0 25px rgba(0,255,224,0.25);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  margin: auto;
-  display: block;
+.lightbox img{
+  max-width:calc(100% - 120px); max-height:80vh;
+  border-radius:12px; box-shadow:0 0 25px rgba(0,255,224,.25);
+  transition:transform .3s ease, opacity .3s ease; margin:auto; display:block;
 }
 
-/* Arrow style */
-.lightbox-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.45);
-  border: none;
-  cursor: pointer;
-  pointer-events: auto;
-  color: #fff;
-  width: 64px; 
-  height: 64px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s ease, transform 0.2s ease;
+/* Panah */
+.lightbox-nav{ position:absolute; top:50%; left:0; right:0; transform:translateY(-50%); pointer-events:none; }
+.lightbox-arrow{
+  position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,.45);
+  border:none; cursor:pointer; pointer-events:auto; color:#fff;
+  width:64px; height:64px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; transition:background .2s, transform .2s;
 }
-.lightbox-arrow:hover {
-  background: rgba(0,0,0,0.65);
-  transform: translateY(-50%) scale(1.1);
-}
-.lightbox-arrow svg {
-  width: 32px; 
-  height: 32px;
-  stroke-width: 2.8;
-}
-.left-arrow { left: 10px; }
-.right-arrow { right: 10px; }
+.lightbox-arrow:hover{ background:rgba(0,0,0,.65); transform:translateY(-50%) scale(1.1); }
+.lightbox-arrow svg{ width:32px; height:32px; stroke-width:2.8; }
+.left-arrow{ left:10px; } .right-arrow{ right:10px; }
+@media (max-width:768px){ .lightbox-arrow{ width:52px;height:52px } .lightbox-arrow svg{ width:26px;height:26px } }
+@media (max-width:480px){ .lightbox-arrow{ width:46px;height:46px } .lightbox-arrow svg{ width:22px;height:22px } }
 
-@media (max-width: 768px) {
-  .lightbox-arrow { width: 52px; height: 52px; }
-  .lightbox-arrow svg { width: 26px; height: 26px; }
-}
-@media (max-width: 480px) {
-  .lightbox-arrow { width: 46px; height: 46px; }
-  .lightbox-arrow svg { width: 22px; height: 22px; }
-}
-.lightbox-nav {
-  position: absolute;
-  top: 50%;
-  left: 0; right: 0;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-.lightbox-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(0,0,0,0.6);
-  border: none;
-  color: white;
-  font-size: 28px;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  cursor: pointer;
-  z-index: 10000;
+.lightbox-close{
+  position:absolute; top:20px; right:20px; background:rgba(0,0,0,.6);
+  border:none; color:#fff; font-size:28px; border-radius:50%; width:44px; height:44px; cursor:pointer; z-index:10000;
 }
 
-/* ==== TAMBAHAN ANTI & LIGHTBOX LANJUTAN (dari versi sebelumnya) ===== */
-/* Anti tap-biru + overscroll chain break */
-:root { --tap-clear: rgba(0,0,0,0); scrollbar-gutter: stable both-edges; }
-html,body,*,a,button,img,svg { -webkit-tap-highlight-color: var(--tap-clear); }
-html,body { overscroll-behavior: none; }
-a,button { -webkit-appearance:none; appearance:none; }
-button,.download-button,.lightbox-arrow,.lightbox-close{
-  outline:none!important; box-shadow:none!important;
-  touch-action:manipulation; -webkit-user-select:none; user-select:none;
-}
-
-/* Hide <img> dalam lightbox: pakai viewport layer */
-#lightboxImage{ display:none !important; }
-
-/* Viewport & layers untuk pinch-zoom/pan & crossfade/slide */
+/* ====== Advanced Lightbox (layer viewport) ====== */
+#lightboxImage{ display:none !important; } /* pakai layer background */
 .lb-viewport{
   position:absolute; inset:0; margin:auto;
   width:calc(100% - 120px); max-width:100%;
-  height:80vh; max-height:80vh;
-  border-radius:12px; overflow:hidden;
-  will-change: transform;
-  touch-action:none;
-  cursor: grab;
-  transform:translateZ(0); contain:layout paint style;
-  overscroll-behavior:contain;
+  height:80vh; max-height:80vh; border-radius:12px; overflow:hidden;
+  will-change:transform; touch-action:none; cursor:grab; transform:translateZ(0);
+  overscroll-behavior:contain; contain:layout paint style;
 }
-.lb-viewport:active{ cursor: grabbing; }
+.lb-viewport:active{ cursor:grabbing; }
 .lb-layer{
-  position:absolute; inset:0;
-  background-repeat:no-repeat;
-  background-position:center center;
-  background-size:contain;
-  opacity:0;
-  transition: opacity .22s ease, transform .22s cubic-bezier(.2,.7,.2,1);
-  will-change: opacity, transform;
+  position:absolute; inset:0; background-repeat:no-repeat; background-position:center center; background-size:contain;
+  opacity:0; transition:opacity .22s ease, transform .22s cubic-bezier(.2,.7,.2,1); will-change:opacity,transform;
 }
 .lb-layer.show{ opacity:1; }
 
-/* Hint cursor saat tepi aktif untuk slide (zoom mode) */
-.lb-viewport.can-edge-left,
-.lb-viewport.can-edge-right{ cursor: ew-resize; }
+/* Edge-slide hint */
+.lb-viewport.can-edge-left,.lb-viewport.can-edge-right{ cursor:ew-resize; }
 
-/* Optional: animasi halus untuk teks “Link rusak?” */
-@keyframes smoothBlink { 0%{opacity:.75} 50%{opacity:1} 100%{opacity:.75} }
+/* Blink anim (untuk teks bantuan kecil) */
+@keyframes smoothBlink{0%{opacity:.75}50%{opacity:1}100%{opacity:.75}}
 </style>
-</head>
-
-<body>
-
-<!-- Lightbox -->
-<div id="lightbox" class="lightbox" style="display:none;">
-  <div class="lightbox-nav">
-    <button class="lightbox-arrow left-arrow">
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-        <path d="M15 19l-7-7 7-7"/>
-      </svg>
-    </button>
-    <button class="lightbox-arrow right-arrow">
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-        <path d="M9 5l7 7-7 7"/>
-      </svg>
-    </button>
-  </div>
-  <img id="lightboxImage" src="" />
-  <button id="closeBtn" class="lightbox-close">✕</button>
-</div>
 
 <!-- BEGIN APK CARD GENERATED -->
 <div class="apk-post-card">
   <div style="display:flex;gap:12px;align-items:center;">
-    <img alt="App Icon" src="https://play-lh.googleusercontent.com/gGsUxZByKdJg-sdb2D7lP-opRVGr26vqJUPbdFAXf0kNdBzSeOYQUmsjeLDHwO1AKmp0=w240-h480-rw" style="width:64px;height:64px;border-radius:14px;"/>
+    <img alt="App Icon" src="${iconUrl}" style="width:64px;height:64px;border-radius:14px;"/>
     <div>
-      <div class="apk-title">Drama Queen<img alt="Verified" class="verified-icon" src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" style="width:18px;height:18px;"/></div>
-      <div class="apk-developer"><a href="https://play.google.com/store/apps/developer?id=Fun+Technologies+Studio&hl=id" target="_blank" rel="noopener noreferrer">Fun Technologies Studio</a></div>
+      <div class="apk-title">${escHTML(appName)}<img alt="Verified" class="verified-icon" src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Twitter_Verified_Badge.svg" style="width:18px;height:18px;"/></div>
+      <div class="apk-developer"><a href="${devLink}" target="_blank" rel="noopener noreferrer">${escHTML(appDev)}</a></div>
     </div>
   </div>
 
   <div class="stat-box">
-    <div class="stat-item"><div class="stat-value">4,8</div><div class="stat-label">Rating</div></div>
-    <div class="stat-item"><div class="stat-value">181</div><div class="stat-label">Ulasan</div></div>
-    <div class="stat-item"><div class="stat-value">5 rb+</div><div class="stat-label">Unduhan</div></div>
+    <div class="stat-item"><div class="stat-value">${escHTML(appRating)}</div><div class="stat-label">Rating</div></div>
+    <div class="stat-item"><div class="stat-value">${escHTML(appReviews)}</div><div class="stat-label">Ulasan</div></div>
+    <div class="stat-item"><div class="stat-value">${escHTML(appDownloads)}</div><div class="stat-label">Unduhan</div></div>
   </div>
 
   <div class="apk-section-title"><b>Deskripsi</b></div>
-  <div class="apk-description">Drama Queen adalah aplikasi streaming drama yang menghadirkan berbagai pilihan Drama Korea (Drakor), Drama China (Drachin), dan drama Asia lainnya langsung di genggamanmu. Nikmati pengalaman menonton yang nyaman, cepat, dan lengkap — kapan pun, di mana pun!
-
-Alternative Tupai Drama</div>
+  <div class="apk-description">${appDesc}</div>
 
   <div class="apk-section-title"><b>Screenshot</b></div>
-  <div class="apk-screenshots"><img src="https://play-lh.googleusercontent.com/yn4UAvtMvFZ_sl9vbd5T_TsfSbiSzB6NFbwqgxyybp1rGhI5KLtgjNnzhnDZOscGDA=w2560-h1440-rw" alt="Screenshot 1" onclick="openLightbox(0)"><img src="https://play-lh.googleusercontent.com/D642dn5I4aNS_rtDcEi-l8C0MfKU9SYn64Es1xRV3D0NS0x8Mp1L25VFX_06s649IPXM=w2560-h1440-rw" alt="Screenshot 2" onclick="openLightbox(1)"><img src="https://play-lh.googleusercontent.com/jCRDMCnCAkP2Z1gRm09uARPUkmapnJW94Nma1j5R5XDUYuR91ITbc9liBnPj80mUS24=w2560-h1440-rw" alt="Screenshot 3" onclick="openLightbox(2)"><img src="https://i.ibb.co.com/XkbXBsg7/Screenshot-20251026-015238-Drama-Queen.png" alt="Screenshot 4" onclick="openLightbox(3)"></div>
+  <div class="apk-screenshots">${screenshotsHTML}</div>
 
   <div class="apk-section-title"><b>Info APK</b></div>
   <table class="apk-info">
-    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M9 3h6v2H9zM5 7h14v2H5zM7 11h10v2H7zM9 15h6v2H9zM11 19h2v2h-2z"/></svg>Versi</div></th><td>0.1.21</td></tr>
-    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 17H5V8h14v12z"/></svg>Update</div></th><td>27 Okt 2025</td></tr>
-    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M17.6 9.48l1.43-2.49a.5.5 0 0 0-.86-.5l-1.45 2.52A8.14 8.14 0 0 0 12 8c-1.7 0-3.28.53-4.72 1.5L5.83 6.49a.5.5 0 0 0-.86.5l1.42 2.49A7.94 7.94 0 0 0 4 15v5a1 1 0 0 0 1 1h2v-6h2v6h6v-6h2v6h2a1 1 0 0 0 1-1v-5c0-2.23-.91-4.24-2.4-5.52z"/></svg>Minimal Android</div></th><td>6</td></tr>
-    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M9 3h6v2h2v2h2v6h-2v2h-2v2H9v-2H7v-2H5V7h2V5h2V3zM7 9v6h10V9H7z"/></svg>CPU Support</div></th><td>v8a</td></tr>
-    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 22a7.5 7.5 0 0 1 13 0"/></svg>Developer</div></th><td><a href="https://play.google.com/store/apps/developer?id=Fun+Technologies+Studio&hl=id" target="_blank" rel="noopener">Fun Technologies Studio</a></td></tr>
-    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>Kategori</div></th><td>Hiburan</td></tr>    
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M9 3h6v2H9zM5 7h14v2H5zM7 11h10v2H7zM9 15h6v2H9zM11 19h2v2h-2z"/></svg>Versi</div></th><td>${escHTML(appVersion)}</td></tr>
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 17H5V8h14v12z"/></svg>Update</div></th><td>${escHTML(appDate)}</td></tr>
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M17.6 9.48l1.43-2.49a.5.5 0 0 0-.86-.5l-1.45 2.52A8.14 8.14 0 0 0 12 8c-1.7 0-3.28.53-4.72 1.5L5.83 6.49a.5.5 0 0 0-.86.5l1.42 2.49A7.94 7.94 0 0 0 4 15v5a1 1 0 0 0 1 1h2v-6h2v6h6v-6h2v6h2a1 1 0 0 0 1-1v-5c0-2.23-.91-4.24-2.4-5.52z"/></svg>Minimal Android</div></th><td>${escHTML(appAndroid)}</td></tr>
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M9 3h6v2h2v2h2v6h-2v2h-2v2H9v-2H7v-2H5V7h2V5h2V3zM7 9v6h10V9H7z"/></svg>CPU Support</div></th><td>${escHTML(cpuArch)}</td></tr>
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M5.5 22a7.5 7.5 0 0 1 13 0"/></svg>Developer</div></th><td><a href="${devLink}" target="_blank" rel="noopener">${escHTML(appDev)}</a></td></tr>
+    <tr><th><div class="icon-text"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8l-2-2z"/></svg>Kategori</div></th><td>${escHTML(appCategory)}</td></tr>    
   </table>
 
   <div class="apk-section-title"><b>Fitur MOD</b></div>
-  <div class="apk-tags"><ul style="list-style:none;padding:0;margin:1em 0;">
-      <li style="display:flex;align-items:center;gap:6px;font-size:0.95rem;font-weight:600;color:#f5f5f5;">
-        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M20.285 6.709l-11.285 11.292-5.285-5.292 1.414-1.414 3.871 3.878 9.871-9.878z"/></svg>
-        PREMIUM
-      </li>
-    </ul></div>
+  <div class="apk-tags">${modHTML}</div>
 
   <div class="apk-buttons">
-    <a class="download-button" href="#" onclick="startDownload(event,'https://shorturl.at/fx5h3')">⬇ Download (28.2MB)</a>
+    <a class="download-button" href="#" onclick="startDownload(event,'${downloadLink}')">⬇ Download${apkSize?` (${apkSize}MB)`:''}</a>
     <div class="spinner-area"><div class="spinner"></div><div class="downloading-text">Mengunduh file…</div></div>
     <p style="margin-top:12px;font-size:0.7rem;color:rgba(255,255,255,0.7);font-weight:500;animation:smoothBlink 3s ease-in-out infinite;">
       🚨 Link rusak? <a href="https://t.me/key_generatebot" target="_blank" style="color:dodgerblue;font-weight:500;">Hubungi saya di Telegram</a>.
@@ -370,9 +369,9 @@ Alternative Tupai Drama</div>
 /* ===================== ANTI SEMUANYA ===================== */
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.addEventListener('keydown', e => {
-  const blocked = ['F12','PrintScreen'];
-  const ctrl = ['c','u','s','a'];
-  if (blocked.includes(e.key) || (e.ctrlKey && ctrl.includes(e.key.toLowerCase()))) e.preventDefault();
+  const blocked=['F12','PrintScreen'];
+  const ctrl=['c','u','s','a'];
+  if(blocked.includes(e.key) || (e.ctrlKey && ctrl.includes(e.key.toLowerCase()))) e.preventDefault();
 });
 document.addEventListener('selectstart', e => e.preventDefault());
 document.addEventListener('dragstart', e => e.preventDefault());
@@ -388,18 +387,18 @@ function startDownload(event, url){
   setTimeout(()=>{
     spinnerArea.style.display = "none";
     button.style.display = "inline-flex";
-    window.open(url,"_blank");
+    window.open(url,"_blank","noopener");
   }, 2000);
 }
 
-/* ===================== Lightbox Lanjutan (pinch, pan, edge-slide) ===================== */
+/* ===================== Lightbox Advanced (pinch, pan, crossfade, edge-slide) ===================== */
 let currentIndex=0, naturalW=1, naturalH=1;
 const lightbox = document.getElementById("lightbox");
 const leftArrow = document.querySelector(".left-arrow");
 const rightArrow = document.querySelector(".right-arrow");
 const closeBtn = document.getElementById("closeBtn");
 
-/* Buat viewport & 2 layer (background-image) */
+/* Buat viewport & 2 layer */
 const viewport = document.createElement('div');
 viewport.className = 'lb-viewport';
 const layerA = document.createElement('div');
@@ -410,7 +409,7 @@ viewport.appendChild(layerA);
 viewport.appendChild(layerB);
 lightbox.insertBefore(viewport, closeBtn);
 
-/* Lazy + loaded class untuk thumbnails */
+/* Loaded class + lazy untuk thumbnails */
 document.querySelectorAll(".apk-screenshots img").forEach(img=>{
   img.setAttribute('loading','lazy');
   if(img.complete) img.classList.add("loaded");
@@ -422,7 +421,7 @@ function updateArrows(screens){
   rightArrow.style.display = currentIndex===screens.length-1?'none':'flex';
 }
 
-/* Preload ukuran asli */
+/* Preload dimensi */
 function preload(src){
   return new Promise((resolve)=>{
     const im = new Image();
@@ -437,7 +436,7 @@ function preload(src){
   });
 }
 
-/* Lock scroll saat lightbox terbuka */
+/* Lock scroll body saat open */
 function lockScroll(lock){
   const html = document.documentElement;
   if(lock){
@@ -453,7 +452,6 @@ function lockScroll(lock){
 /* Zoom & Pan */
 let zoom=1, panX=0, panY=0, isPanning=false, startPX=0, startPY=0;
 let baseW=0, baseH=0;
-
 function computeBaseSize(){
   const vpW = viewport.clientWidth;
   const vpH = viewport.clientHeight;
@@ -468,14 +466,14 @@ function clampPan(){
 }
 function applyTransform(){
   clampPan();
-  viewport.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
+  viewport.style.transform = \`translate(\${panX}px, \${panY}px) scale(\${zoom})\`;
 }
 function resetView(){
   zoom=1; panX=0; panY=0; isPanning=false;
   viewport.style.transform = 'translate(0px, 0px) scale(1)';
 }
 
-/* Pan hanya saat zoom>1 */
+/* Pan saat zoom>1 */
 viewport.addEventListener('pointerdown', (e)=>{
   if(zoom===1) return;
   isPanning=true;
@@ -497,7 +495,7 @@ viewport.addEventListener('pointermove', (e)=>{
   });
 });
 
-/* Pinch zoom 2 jari (touch) */
+/* Pinch zoom 2 jari */
 const activePtrs=new Map();
 let pinchStartDist=0, pinchStartZoom=1;
 viewport.addEventListener('pointerdown',(e)=>{
@@ -524,8 +522,8 @@ viewport.addEventListener('pointermove',(e)=>{
   });
 });
 
-/* Open / Close */
-function setLayerBG(el, src){ el.style.backgroundImage = `url("${src}")`; }
+/* Open/Close */
+function setLayerBG(el, src){ el.style.backgroundImage = \`url("\${src}")\`; }
 async function openLightbox(index){
   const screens = document.querySelectorAll(".apk-screenshots img");
   if(!screens.length) return;
@@ -551,12 +549,11 @@ function closeLightbox(){
   lockScroll(false);
 }
 
-/* Crossfade antar gambar */
+/* Crossfade */
 let currentIsA = true;
 async function crossfadeTo(src){
   const sz = await preload(src);
-  naturalW = sz.w; naturalH = sz.h;
-  computeBaseSize();
+  naturalW = sz.w; naturalH = sz.h; computeBaseSize();
 
   const next = currentIsA ? layerB : layerA;
   const curr = currentIsA ? layerA : layerB;
@@ -569,7 +566,7 @@ async function crossfadeTo(src){
   currentIsA = !currentIsA;
 }
 
-/* Navigasi dasar */
+/* Navigasi */
 function nextImage(){
   const screens=document.querySelectorAll(".apk-screenshots img");
   if(currentIndex < screens.length-1){
@@ -589,40 +586,33 @@ function prevImage(){
   }
 }
 
-/* Binding tombol */
+/* Tombol panah */
 leftArrow.addEventListener("click", e=>{ e.stopPropagation(); prevImage(); });
 rightArrow.addEventListener("click", e=>{ e.stopPropagation(); nextImage(); });
 
-/* Hanya tombol ❌ yang boleh close (backdrop & ESC diblok) */
-function handleClose(e){
-  e.preventDefault?.(); e.stopPropagation?.();
-  closeLightbox();
-}
-closeBtn.addEventListener("click", handleClose);
+/* Close: hanya tombol X (ESC & backdrop diblok) */
+document.getElementById("closeBtn").addEventListener("click", e=>{ e.preventDefault(); e.stopPropagation(); closeLightbox(); });
 
-/* Blok backdrop click menutup */
 lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) { e.preventDefault(); e.stopImmediatePropagation(); }
 }, true);
 
-/* Keyboard: cuma panah kiri/kanan; ESC diblok */
 document.addEventListener("keydown", e => {
   if(lightbox.style.display !== "flex") return;
   if(e.key === "ArrowRight") nextImage();
   if(e.key === "ArrowLeft")  prevImage();
-  if(e.key === "Escape"){ e.preventDefault(); e.stopImmediatePropagation(); }
+  if(e.key === "Escape"){ e.preventDefault(); e.stopImmediatePropagation(); } /* blok ESC */
 });
 
-/* Resize jaga clamp */
+/* Resize menjaga clamp */
 window.addEventListener('resize', ()=>{
   if(lightbox.style.display === "flex"){ computeBaseSize(); applyTransform(); }
 });
 
-/* Edge slide saat zoom>1 (tarik melewati tepi) */
+/* Edge slide saat zoom>1 */
 const EDGE_TRIGGER = 72;   // px
 const SLIDE_DUR = 220;     // ms
 let edgePull = 0, isSliding = false;
-
 viewport.addEventListener('pointerdown', () => { edgePull = 0; }, true);
 viewport.addEventListener('pointermove', (e) => {
   if (zoom === 1 || !isPanning) { edgePull = 0; viewport.classList.remove('can-edge-left','can-edge-right'); return; }
@@ -661,14 +651,14 @@ async function slideTo(dir){
   curr.style.transition = 'none';
   next.style.opacity = '1';
   curr.style.opacity = '1';
-  next.style.transform = `translateX(${dir*100}%)`;
-  curr.style.transform = `translateX(0%)`;
+  next.style.transform = \`translateX(\${dir*100}%)\`;
+  curr.style.transform = \`translateX(0%)\`;
   next.getBoundingClientRect();
 
-  const trans = `transform ${SLIDE_DUR}ms cubic-bezier(.2,.7,.2,1)`;
+  const trans = \`transform \${SLIDE_DUR}ms cubic-bezier(.2,.7,.2,1)\`;
   next.style.transition = trans; curr.style.transition = trans;
   next.style.transform = 'translateX(0%)';
-  curr.style.transform = `translateX(${-dir*100}%)`;
+  curr.style.transform = \`translateX(\${-dir*100}%)\`;
 
   const onDone = () => {
     next.removeEventListener('transitionend', onDone);
@@ -700,6 +690,16 @@ document.querySelectorAll(".apk-screenshots img").forEach(img=>{
   if(img.complete) img.classList.add("loaded");
   else img.addEventListener("load", ()=> img.classList.add("loaded"));
 });
+</script>`;
+
+  document.getElementById('outputHTML').value = html;
+}
+
+function copyOut(){
+  const ta = document.getElementById('outputHTML');
+  ta.select(); ta.setSelectionRange(0, 999999);
+  document.execCommand('copy');
+}
 </script>
 </body>
 </html>
